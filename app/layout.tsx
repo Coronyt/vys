@@ -1,6 +1,7 @@
 import "./globals.css";
 
 import type { Metadata } from "next";
+import Navbar from "@/components/navbar";
 import { Outfit } from "next/font/google";
 
 export const metadata: Metadata = {
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={outfit.className}>
+        <Navbar></Navbar>
         {children}
       </body>
     </html>
