@@ -19,8 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={outfit.className}>
-        <Navbar></Navbar>
-        {children}
+        <div className="bg-black min-h-screen pt-2">
+          <div className="min-w-3xl place-self-center">
+            <Navbar></Navbar>
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   );

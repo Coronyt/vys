@@ -1,6 +1,6 @@
 export default function Dash() {
   return (
-    <div>
+    <div className="page">
       <h2>Dashboard</h2>
     </div>
   );

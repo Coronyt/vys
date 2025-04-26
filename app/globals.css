@@ -8,8 +8,6 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +20,28 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  @apply text-2xl;
+}
+
+.navbar {
+  @apply flex place-content-between font-semibold p-2 m-2;
+}
+
+.navlinks div {
+  @apply inline-block ml-4;
+}
+
+.navlinks div a {
+  @apply p-1 hover:text-blue-400 hover:cursor-pointer transition ease-linear duration-200;
+}
+
+.navlinks div svg {
+  @apply hover:text-blue-400 hover:cursor-pointer;
+}
+
+.page {
+  @apply bg-gradient-to-b from-blue-900 min-h-screen m-4 p-4 rounded-t-md;
 }
