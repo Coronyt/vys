@@ -23,20 +23,24 @@ body {
   color: var(--foreground);
 }
 
-h1 {
-  @apply text-2xl;
+.title {
+  @apply ml-4 hover:cursor-default border-2 rounded-full p-0.5 pr-3 pl-3;
 }
 
-.title {
-  @apply hover:cursor-pointer;
+.title h1 {
+  @apply text-lg tracking-widest;
 }
 
 .navbar {
   @apply flex place-content-between font-semibold p-2 m-2;
 }
 
+.navlinks {
+  @apply mr-4;
+}
+
 .navlinks div {
-  @apply inline-block ml-4;
+  @apply inline-block ml-4 hover:animate-jump;
 }
 
 .navlinks div a {
