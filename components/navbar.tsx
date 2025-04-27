@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Navbar() {
     return (
         <div className="navbar">
-            <h1>vys</h1>
+            <h1 className="title">vys</h1>
             <div className="navlinks">
                 <div>
                     <Link href="/">

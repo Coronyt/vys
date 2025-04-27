@@ -27,6 +27,10 @@ h1 {
   @apply text-2xl;
 }
 
+.title {
+  @apply hover:cursor-pointer;
+}
+
 .navbar {
   @apply flex place-content-between font-semibold p-2 m-2;
 }
