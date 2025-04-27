@@ -51,6 +51,38 @@ body {
   @apply hover:text-blue-400 hover:cursor-pointer;
 }
 
+.order_form {
+  @apply justify-self-center p-6 border-1 rounded-2xl;
+}
+
+.form_segment {
+  @apply pt-2 pb-2 flex justify-between;
+}
+
+.form_segment label {
+  @apply mr-20;
+}
+
+.form_segment textarea {
+  resize: none;
+}
+
+.form_submit {
+  @apply flex justify-end;
+}
+
+.form_submit input {
+  @apply border-1 mt-4 p-1 rounded-md pl-2 pr-2 hover:cursor-pointer transition ease-linear duration-100 hover:-translate-y-1 hover:border-blue-400;
+}
+
+.name_input {
+  @apply border-1 ml-2 p-1 w-80 rounded-sm text-sm;
+}
+
+.desc_input {
+  @apply border-1 ml-2 p-2 min-h-60 w-80 rounded-sm text-sm;
+}
+
 .page {
-  @apply bg-gradient-to-b from-gray-900 min-h-screen m-4 p-4 rounded-t-md animate-fade-up;
+  @apply m-4 p-4 rounded-t-md animate-fade-up;
 }

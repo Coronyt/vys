@@ -1,18 +1,17 @@
 export default function OrderForm() {
   return (
     <form className="order_form">
-      <h2>order_form</h2>
       <div className="form_segment">
         <label htmlFor="name_input">Order name:</label>
-        <input type="text" name="name_input" id="name_input" className="border-1"/>
+        <input type="text" name="name_input" id="name_input" className="name_input"/>
       </div>
       <div className="form_segment">
-        <label htmlFor="desc_input">Order description:</label>
-        <textarea name="desc_input" id="desc_input" className="border-1"/>
+        <label htmlFor="desc_input">Description:</label>
+        <textarea name="desc_input" id="desc_input" className="desc_input"/>
       </div>
       <div className="form_segment">
-        <label htmlFor="res_input">Assign a resource:</label>
-        <select name="res_input" id="res_input">
+        <label htmlFor="res_input">Assign resource:</label>
+        <select name="res_input" id="res_input" className="ml-2">
           <optgroup>
             <option>resource1</option>
             <option>resource2</option>
@@ -23,12 +22,15 @@ export default function OrderForm() {
         </select>
       </div>
       <div className="form_segment">
-        <label htmlFor="start_input">Order start date:</label>
+        <label htmlFor="start_input">Start date:</label>
         <input type="date" name="start_input" id="start_input"/>
       </div>
       <div className="form_segment">
-        <label htmlFor="end_input">Order end date:</label>
+        <label htmlFor="end_input">End date:</label>
         <input type="date" name="end_input" id="end_input"/>
+      </div>
+      <div className="form_submit">
+        <input type="submit" value="Create order"/>
       </div>
     </form>
   );
