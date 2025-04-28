@@ -9,7 +9,13 @@ export default function OrderForm() {
   const [name, setName] = useState("New order");
   const [desc, setDesc] = useState("New order description");
 
-  const date = new Date();
+  const [start_date, setStartDate] = useState("");
+  const [end_date, setEndDate] = useState("");
+
+  const [start_time, setStartTime] = useState("");
+  const [end_time, setEndTime] = useState("");
+
+  // const date = new Date();
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -58,11 +64,21 @@ export default function OrderForm() {
             type="date"
             name="start_date_input"
             id="start_date_input"
-            // value={start}
-            // onChange={(e) =>{setStart(e.target.value)}}
+            value={start_date}
+            onChange={(e) =>{
+              console.log(e.target.value);
+              setStartDate(e.target.value);
+            }}
           />
           <input
             type="time"
+            name="start_time_input"
+            id="start_time_input"
+            value={start_time}
+            onChange={(e) =>{
+              console.log(e.target.value);
+              setStartTime(e.target.value);
+            }}
           />
         </div>
       </div>
@@ -73,11 +89,21 @@ export default function OrderForm() {
             type="date"
             name="end_date_input"
             id="end_date_input"
-            // value={end}
-            // onChange={(e) =>{setEnd(e.target.value)}}
+            value={end_date}
+            onChange={(e) =>{
+              console.log(e.target.value);
+              setEndDate(e.target.value);
+            }}
           />
           <input
             type="time"
+            name="end_time_input"
+            id="end_time_input"
+            value={end_time}
+            onChange={(e) =>{
+              console.log(e.target.value);
+              setEndTime(e.target.value);
+            }}
           />
         </div>
       </div>
