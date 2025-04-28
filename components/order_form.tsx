@@ -1,5 +1,6 @@
 'use client';
 
+import { DateTime } from "@/interfaces/DateTime";
 import { Order } from "@/interfaces/Order";
 import { Resource } from "@/interfaces/Resource";
 import { useState } from "react";
@@ -9,17 +10,52 @@ export default function OrderForm() {
   const [name, setName] = useState("New order");
   const [desc, setDesc] = useState("New order description");
 
+  // Dummy resource for testing purposes
+  const test_res: Resource = {
+    name: "test_res",
+    id: "2814",
+    in_use: false
+  }
+
+  const [res, setRes] = useState(test_res);
+
   const [start_date, setStartDate] = useState("");
-  const [end_date, setEndDate] = useState("");
-
   const [start_time, setStartTime] = useState("");
+  const [end_date, setEndDate] = useState("");
   const [end_time, setEndTime] = useState("");
-
-  // const date = new Date();
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(e);
+    // Loading start date/time information into DateTime object
+    const start_date_arr = start_date.split("-"); // [0] = year, [1] = month, [2] = day
+    const start_time_arr = start_time.split(":"); // [0] = hour, [1] = minute
+    const start_date_time: DateTime = {
+      month: Number(start_date_arr[1]),
+      day: Number(start_date_arr[2]),
+      year: Number(start_date_arr[0]),
+      hour: Number(start_time_arr[0]),
+      minute: Number(start_time_arr[1])
+    } // Loading end date/time information into DateTime object
+    const end_date_arr = end_date.split("-"); // [0] = year, [1] = month, [2] = day
+    const end_time_arr = end_time.split(":"); // [0] = hour, [1] = minute
+    const end_date_time: DateTime = {
+      month: Number(end_date_arr[1]),
+      day: Number(end_date_arr[2]),
+      year: Number(end_date_arr[0]),
+      hour: Number(end_time_arr[0]),
+      minute: Number(end_time_arr[1])
+    } // Loading all order information into Order object
+    const new_order: Order = {
+      name: name,
+      desc: desc,
+      res: res,
+      start: start_date_time,
+      end: end_date_time
+    }
+    console.log(new_order);
+    // TODO - Hand the Order object up to the appropriate React context
+      // Eventually the orders will be stored locally through a JSON server
+      // In the final iteration, the orders will be organized into a SQL database
   }
 
   return (
