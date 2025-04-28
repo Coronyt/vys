@@ -38,9 +38,9 @@ export default function OrderForm() {
           value={desc}
           onChange={(e) => {setDesc(e.target.value)}}
         />
-      </div>
+      </div> <hr />
       <div className="form_segment">
-        <label htmlFor="res_input">Assign resource:</label>
+        <label htmlFor="res_input">Assign a resource:</label>
         <select name="res_input" id="res_input" className="ml-2">
           <optgroup>
             <option>resource1</option>
@@ -52,24 +52,34 @@ export default function OrderForm() {
         </select>
       </div>
       <div className="form_segment">
-        <label htmlFor="start_input">Start date:</label>
-        <input
-          type="date"
-          name="start_input"
-          id="start_input"
-          // value={start}
-          // onChange={(e) =>{setStart(e.target.value)}}
-        />
+        <label htmlFor="start_input">Start date/time:</label>
+        <div>
+          <input
+            type="date"
+            name="start_date_input"
+            id="start_date_input"
+            // value={start}
+            // onChange={(e) =>{setStart(e.target.value)}}
+          />
+          <input
+            type="time"
+          />
+        </div>
       </div>
       <div className="form_segment">
-        <label htmlFor="end_input">End date:</label>
-        <input
-          type="date"
-          name="end_input"
-          id="end_input"
-          // value={end}
-          // onChange={(e) =>{setEnd(e.target.value)}}
-        />
+        <label htmlFor="end_input">End date/time:</label>
+        <div>
+          <input
+            type="date"
+            name="end_date_input"
+            id="end_date_input"
+            // value={end}
+            // onChange={(e) =>{setEnd(e.target.value)}}
+          />
+          <input
+            type="time"
+          />
+        </div>
       </div>
       <div className="form_submit">
         <input type="submit" value="Create order"/>

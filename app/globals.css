@@ -55,6 +55,10 @@ body {
   @apply justify-self-center p-6 border-1 rounded-2xl;
 }
 
+.order_form hr {
+  @apply mt-6 mb-6;
+}
+
 .form_segment {
   @apply pt-2 pb-2 flex justify-between;
 }
