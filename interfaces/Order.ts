@@ -4,6 +4,6 @@ export interface Order {
     name: string,
     desc: string,
     res: Resource,
-    start: Date,
-    end: Date
+    start: number,
+    end: number
 }
