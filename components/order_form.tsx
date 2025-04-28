@@ -3,9 +3,12 @@
 import { DateTime } from "@/interfaces/DateTime";
 import { Order } from "@/interfaces/Order";
 import { Resource } from "@/interfaces/Resource";
+import { useOrderContext } from "@/context/order_context";
 import { useState } from "react";
 
 export default function OrderForm() {
+
+  const { orders, setOrders } = useOrderContext();
 
   const [name, setName] = useState("New order");
   const [desc, setDesc] = useState("New order description");
