@@ -1,4 +1,4 @@
-'use client';
+'use client'; // FOR TESTING PURPOSES ONLY
 
 import { useEffect } from "react";
 import { useOrderContext } from "@/context/order_context";
@@ -36,7 +36,7 @@ export default function Inspect() {
       start: test_date,
       end: test_date
     }
-    setOrders([order1, order2, order3]);
+    // setOrders([order1, order2, order3]);
   }, []);
 
   return (

@@ -4,9 +4,12 @@ import { DateTime } from "@/interfaces/DateTime";
 import { Order } from "@/interfaces/Order";
 import { Resource } from "@/interfaces/Resource";
 import { useOrderContext } from "@/context/order_context";
+import { useRouter } from 'next/navigation'
 import { useState } from "react";
 
 export default function OrderForm() {
+
+  const router = useRouter()
 
   const { orders, setOrders } = useOrderContext();
 
@@ -55,10 +58,16 @@ export default function OrderForm() {
       start: start_date_time,
       end: end_date_time
     }
-    console.log(new_order);
-    // TODO - Hand the Order object up to the appropriate React context
+    // Get current orders
+    const curr = orders;
+    // Append to array
+    curr.push(new_order);
+    // Hand to context
       // Eventually the orders will be stored locally through a JSON server
       // In the final iteration, the orders will be organized into a SQL database
+    setOrders(curr);
+    // Redirect to table
+    router.push("/inspect");
   }
 
   return (
