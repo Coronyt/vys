@@ -99,11 +99,7 @@ export default function OrderForm() {
         <label htmlFor="res_input">Assign a resource:</label>
         <select name="res_input" id="res_input" className="ml-2">
           <optgroup>
-            <option>resource1</option>
-            <option>resource2</option>
-            <option>resource3</option>
-            <option>resource4</option>
-            <option>resource5</option>
+            {resources.map((element, index) => {return <option key={index}>{element.name}</option>})}
           </optgroup>
         </select>
       </div>
