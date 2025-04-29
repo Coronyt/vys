@@ -4,7 +4,8 @@ import { DateTime } from "@/interfaces/DateTime";
 import { Order } from "@/interfaces/Order";
 import { Resource } from "@/interfaces/Resource";
 import { useOrderContext } from "@/context/order_context";
-import { useRouter } from 'next/navigation'
+import { useResContext } from "@/context/res_context";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function OrderForm() {
@@ -12,6 +13,7 @@ export default function OrderForm() {
   const router = useRouter()
 
   const { orders, setOrders } = useOrderContext();
+  const { resources, setResources } = useResContext();
 
   const [name, setName] = useState("New order");
   const [desc, setDesc] = useState("New order description");
