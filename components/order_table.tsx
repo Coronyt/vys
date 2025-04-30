@@ -1,8 +1,8 @@
 'use client';
 
-import { flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 
-import TableEntry from "./table_entry";
+import TableEntries from "./table_entries";
 import TableHeader from "./table_header";
 import { useOrderContext } from "@/context/order_context";
 
@@ -11,38 +11,23 @@ export default function Table() {
     const columns = [
       {
           accessorKey: 'name',
-          header: 'Order',
-          cell: (props: any) => {
-              <p>{props.getValue()}</p>
-          }
+          header: 'Order'
       },
       {
         accessorKey: 'desc',
-        header: 'Description',
-        cell: (props: any) => {
-            <p>{props.getValue()}</p>
-        }
+        header: 'Description'
       },
       {
         accessorKey: 'res',
-        header: 'Resource',
-        cell: (props: any) => {
-            <p>{props.getValue().name}</p>
-        }
+        header: 'Resource'
       },
       {
         accessorKey: 'start',
-        header: 'Start date/time',
-        cell: (props: any) => {
-            <p>{props.getValue().year}</p>
-        }
+        header: 'Start date/time'
       },
       {
         accessorKey: 'end',
-        header: 'End date/time',
-        cell: (props: any) => {
-            <p>{props.getValue().year}</p>
-        }
+        header: 'End date/time'
       }
     ]
 
@@ -54,25 +39,11 @@ export default function Table() {
       getCoreRowModel: getCoreRowModel()
     });
 
-    // console.log(table.getRowModel().rows[0].getVisibleCells()[0].column.id);
-
     return (
       <div>
-        <h2>order_table</h2> <br /> <hr /> <br />
-        <TableHeader header_groups={table.getHeaderGroups()}></TableHeader>
-        {table.getRowModel().rows.map((row: any) => {
-          return <div className="table_row">
-            {row.getVisibleCells().map((cell: any) => {
-              return <div className="table_cell">
-                {cell.column.id == "name" && `${cell.getValue()}`}
-                {cell.column.id == "desc" && `${cell.getValue()}`}
-                {cell.column.id == "res" && `${cell.getValue().name}`}
-                {cell.column.id == "start" && `${cell.getValue().year}`}
-                {cell.column.id == "end" && `${cell.getValue().year}`}
-              </div>
-            })}
-          </div>
-        })}
+        <h2 className="text-4xl pb-6">View all orders</h2> <hr />
+        <TableHeader table={table}></TableHeader>
+        <TableEntries table={table}></TableEntries>
       </div>
     );
   }
