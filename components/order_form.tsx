@@ -74,7 +74,7 @@ export default function OrderForm() {
 
   return (
     <form className="order_form" onSubmit={(e) => submit(e)}>
-      <h2 className="text-4xl pb-6">Create a new order</h2>
+      <h2 className="page_title">Create a new order</h2>
       <div className="form_segment">
         <label htmlFor="name_input">Order name:</label>
         <input

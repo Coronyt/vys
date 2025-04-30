@@ -23,8 +23,8 @@ export default function RootLayout({
       <body className={default_font.className}>
         <ResContextProvider>
           <OrderContextProvider>
-            <div className="bg-black min-h-screen pt-2">
-              <div className="min-w-3xl place-self-center">
+            <div className="layout_primary">
+              <div className="layout_secondary">
                 <Navbar></Navbar>
                 {children}
               </div>

@@ -41,7 +41,7 @@ export default function Table() {
 
     return (
       <div>
-        <h2 className="text-4xl pb-6">View all orders</h2> <hr />
+        <h2 className="page_title">View all orders</h2>
         <TableHeader table={table}></TableHeader>
         <TableEntries table={table}></TableEntries>
       </div>
