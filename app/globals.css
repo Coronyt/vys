@@ -87,6 +87,14 @@ body {
   @apply border-1 ml-2 p-2 min-h-60 w-80 rounded-sm text-sm;
 }
 
+.table_row {
+  @apply flex justify-between;
+}
+
+.table_cell {
+  @apply border-1 p-3 w-80 h-12;
+}
+
 .page {
   @apply m-4 p-4 rounded-t-md animate-fade-up;
 }
