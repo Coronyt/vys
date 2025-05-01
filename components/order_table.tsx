@@ -13,10 +13,10 @@ export default function Table() {
           accessorKey: 'name',
           header: 'Order'
       },
-      {
-        accessorKey: 'desc',
-        header: 'Description'
-      },
+      // {
+      //   accessorKey: 'desc',
+      //   header: 'Description'
+      // },
       {
         accessorKey: 'res',
         header: 'Resource'
@@ -36,7 +36,20 @@ export default function Table() {
     const table = useReactTable({
       data: orders,
       columns,
-      getCoreRowModel: getCoreRowModel()
+      getCoreRowModel: getCoreRowModel(),
+      meta: {
+        update: (row_index: number, column_id: string, value: any) => {
+          setOrders(
+            prev => prev.map(
+              (row, index) =>
+                index === row_index ? {
+                  ...prev[row_index],
+                  [column_id]: value
+                }: row
+            )
+          );
+        }
+      }
     });
 
     return (

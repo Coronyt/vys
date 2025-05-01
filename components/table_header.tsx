@@ -8,7 +8,11 @@ export default function TableHeader(props: any) {
             return <div className="table_row pt-4" key={header_group.id}>
                 {header_group.headers.map((header: any) => {
                 return <div className="table_cell" key={header.id}>
-                    {`${header.column.columnDef.header}`}
+                    <div className="flex justify-center">
+                      <div className="uppercase">
+                        {`${header.column.columnDef.header}`}
+                      </div>
+                    </div>
                 </div>
             })}</div>
         })}
