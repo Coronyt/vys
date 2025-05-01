@@ -92,7 +92,7 @@ body {
 }
 
 .table_cell {
-  @apply border-1 p-3 w-60 h-12;
+  @apply border-b-1 border-r-1 p-3 w-60 h-12;
 }
 
 .page_title {
