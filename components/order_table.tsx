@@ -38,6 +38,7 @@ export default function Table() {
       columns,
       getCoreRowModel: getCoreRowModel(),
       meta: {
+        // TODO - Add comments to this code
         update: (row_index: number, column_id: string, value: any) => {
           setOrders(
             prev => prev.map(

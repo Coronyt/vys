@@ -1,3 +1,4 @@
+import ResDropCell from "./cells/res_drop";
 import TextEditCell from "./cells/text_edit";
 
 export default function TableEntries(props: any) {
@@ -12,7 +13,7 @@ export default function TableEntries(props: any) {
               return <div className={(cell.column.id == "name") ? "table_cell border-l-1" : "table_cell"} key={cell.id}>
                 {cell.column.id == "name" && <TextEditCell table={props.table} row={row} cell={cell} />}
                 {cell.column.id == "desc" && `${cell.getValue()}`}
-                {cell.column.id == "res" && `${cell.getValue()}`}
+                {cell.column.id == "res" && <ResDropCell table={props.table} row={row} cell={cell} />}
                 {cell.column.id == "start" && `${cell.getValue().year}`}
                 {cell.column.id == "end" && `${cell.getValue().year}`}
               </div>
