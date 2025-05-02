@@ -1,3 +1,4 @@
+import DateTimeCell from "./cells/date_time";
 import ResDropCell from "./cells/res_drop";
 import TextEditCell from "./cells/text_edit";
 
@@ -14,7 +15,7 @@ export default function TableEntries(props: any) {
                 {cell.column.id == "name" && <TextEditCell table={props.table} row={row} cell={cell} />}
                 {cell.column.id == "desc" && `${cell.getValue()}`}
                 {cell.column.id == "res" && <ResDropCell table={props.table} row={row} cell={cell} />}
-                {cell.column.id == "start" && `${cell.getValue().year}`}
+                {cell.column.id == "start" && <DateTimeCell table={props.table} row={row} cell={cell} />}
                 {cell.column.id == "end" && `${cell.getValue().year}`}
               </div>
             })}
