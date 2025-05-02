@@ -5,14 +5,6 @@ import { useResContext } from "@/context/res_context";
 
 export default function ResDropCell(props: any) {
 
-    // const blur = () => {
-    //     props.table.options.meta.update(
-    //         props.row.index,
-    //         props.cell.column.id,
-    //         text
-    //     );
-    // }
-
     const { resources, setResources } = useResContext();
 
     const [local_res, setLocalRes] = useState(Array.from(resources));
@@ -37,8 +29,14 @@ export default function ResDropCell(props: any) {
             <select
             name="res_input"
             id="res_input"
-            className="w-48"
-            // onChange={(e) => {setRes(e.target.value)}}
+            className="w-56"
+            onChange={(e) => {
+                props.table.options.meta.update(
+                    props.row.index,
+                    props.cell.column.id,
+                    e.target.value
+                );
+            }}
             >
             <optgroup>
                 {local_res.map((res, index) => {return <option key={index} value={res.id}>{res.name}</option>})}
