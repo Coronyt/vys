@@ -2,7 +2,6 @@
 
 import { DateTime } from "@/interfaces/DateTime";
 import { Order } from "@/interfaces/Order";
-import { Resource } from "@/interfaces/Resource";
 import { useOrderContext } from "@/context/order_context";
 import { useResContext } from "@/context/res_context";
 import { useRouter } from "next/navigation";
@@ -18,14 +17,7 @@ export default function OrderForm() {
   const [name, setName] = useState("New order");
   const [desc, setDesc] = useState("New order description");
 
-  // Dummy resource for testing purposes
-  const test_res: Resource = {
-    name: "test_res",
-    id: "2814",
-    in_use: false
-  }
-
-  const [res, setRes] = useState(test_res);
+  const [res, setRes] = useState(resources[0].id); // Default to first resource in master list
 
   const [start_date, setStartDate] = useState("");
   const [start_time, setStartTime] = useState("");
@@ -98,9 +90,14 @@ export default function OrderForm() {
       </div> <hr />
       <div className="form_segment">
         <label htmlFor="res_input">Assign a resource:</label>
-        <select name="res_input" id="res_input" className="ml-2">
+        <select
+          name="res_input"
+          id="res_input"
+          className="ml-2"
+          onChange={(e) => {setRes(e.target.value)}}
+        >
           <optgroup>
-            {resources.map((element, index) => {return <option key={index}>{element.name}</option>})}
+            {resources.map((element, index) => {return <option key={index} value={element.id}>{element.name}</option>})}
           </optgroup>
         </select>
       </div>
