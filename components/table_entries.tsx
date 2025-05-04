@@ -1,4 +1,5 @@
 import DateTimeCell from "./cells/date_time";
+import OrderStatusCell from "./cells/ord_status";
 import ResDropCell from "./cells/res_drop";
 import TextEditCell from "./cells/text_edit";
 
@@ -17,6 +18,7 @@ export default function TableEntries(props: any) {
                 {cell.column.id == "res" && <ResDropCell table={props.table} row={row} cell={cell} />}
                 {cell.column.id == "start" && <DateTimeCell table={props.table} row={row} cell={cell} />}
                 {cell.column.id == "end" && `${cell.getValue().year}`}
+                {cell.column.id == "status" && <OrderStatusCell></OrderStatusCell>}
               </div>
             })}
           </div>

@@ -28,6 +28,10 @@ export default function Table() {
       {
         accessorKey: 'end',
         header: 'End date/time'
+      },
+      {
+        accessorKey: 'status',
+        header: 'Status'
       }
     ]
 
