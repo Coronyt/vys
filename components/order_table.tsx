@@ -2,6 +2,7 @@
 
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 
+import { Order } from "@/interfaces/Order";
 import TableEntries from "./table_entries";
 import TableHeader from "./table_header";
 import { useOrderContext } from "@/context/order_context";

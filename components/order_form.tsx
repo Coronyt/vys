@@ -110,7 +110,7 @@ export default function OrderForm() {
             id="start_date_input"
             value={start_date}
             onChange={(e) =>{
-              console.log(e.target.value);
+              // console.log(e.target.value);
               setStartDate(e.target.value);
             }}
           />
@@ -120,7 +120,7 @@ export default function OrderForm() {
             id="start_time_input"
             value={start_time}
             onChange={(e) =>{
-              console.log(e.target.value);
+              // console.log(e.target.value);
               setStartTime(e.target.value);
             }}
           />
@@ -135,7 +135,7 @@ export default function OrderForm() {
             id="end_date_input"
             value={end_date}
             onChange={(e) =>{
-              console.log(e.target.value);
+              // console.log(e.target.value);
               setEndDate(e.target.value);
             }}
           />
@@ -145,7 +145,7 @@ export default function OrderForm() {
             id="end_time_input"
             value={end_time}
             onChange={(e) =>{
-              console.log(e.target.value);
+              // console.log(e.target.value);
               setEndTime(e.target.value);
             }}
           />

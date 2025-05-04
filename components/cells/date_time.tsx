@@ -4,8 +4,8 @@ import { useState } from "react";
 
 export default function DateTimeCell(props: any) {
 
-    console.log(props.cell.getValue());
-    console.log(build_date(props.cell.getValue()));
+    // console.log(props.cell.getValue());
+    // console.log(build_date(props.cell.getValue()));
     // const [dateText, setDateText] = useState(props.cell.getValue());
 
     return (
@@ -15,16 +15,16 @@ export default function DateTimeCell(props: any) {
             <input
                 type="text"
                 value={build_date_display(props.cell.getValue())}
-                // onChange={(e) => {setText(e.target.value)}}
-                // onBlur={blur}
+                onChange={() => {}}
+                onBlur={() => {}}
                 className="w-24 text-center"
             />
             <div className="w-2" />
             <input
                 type="text"
                 value={"12:00 PM"}
-                // onChange={(e) => {setText(e.target.value)}}
-                // onBlur={blur}
+                onChange={() => {}}
+                onBlur={() => {}}
                 className="w-24 text-center"
             />
         </div>

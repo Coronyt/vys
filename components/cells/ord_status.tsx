@@ -10,7 +10,7 @@ export default function OrderStatusCell(props: any) {
             </div>
             {/* Delete order */}
             <div className="relative left-60 -top-7 w-10">
-                <DeleteOrderCell></DeleteOrderCell>
+                <DeleteOrderCell table={props.table} row={props.row} cell={props.cell} />
             </div>
         </div>
     );
