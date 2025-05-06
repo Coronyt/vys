@@ -1,8 +1,11 @@
 import DeleteOrderCell from "./del_order";
+import { useState } from "react";
 
 export default function OrderStatusCell(props: any) {
     
     // console.log(props.cell.getValue());
+
+    const [status, setStatus] = useState(props.cell.getValue());
 
     return (
         <div>

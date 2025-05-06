@@ -1,5 +1,6 @@
 // Will return a date string formatted for Zod validation
 export const build_date = (dt: DateTime): string => {
+    // console.log("passed datetime, ", dt);
     let date_str = `${dt.year}`;
     if (dt.month < 10) {date_str += "-0" + dt.month} else {date_str += "-" + dt.month}
     if (dt.day < 10) {date_str += "-0" + dt.day} else {date_str += "-" + dt.day}
