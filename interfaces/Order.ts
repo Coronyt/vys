@@ -5,17 +5,17 @@ import { z } from "zod";
 const zdate = z.string().date();
 const ztime = z.string().time();
 
-export const update_status_all = (orders: Order[]) => {
-    orders.forEach((order) => {
-        console.log("updating status of ", order);
-        update_status(order);
-        console.log("new status of ", order);
-    });
+export const update_status_all = () => {
+    // orders.forEach((order) => {
+    //     console.log("updating status of ", order);
+    //     update_status(order);
+    //     console.log("new status of ", order);
+    // });
 }
 
 export const update_status = (order: Order): Status => {
     const curr_date = new Date();
-    console.log("order passed: ", order);
+    // console.log("order passed: ", order);
     try {
         // console.log(build_date(order.start));
         zdate.parse(build_date(order.start));

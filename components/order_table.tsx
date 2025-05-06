@@ -1,10 +1,11 @@
 'use client';
 
+import { Status, update_status, update_status_all } from "@/interfaces/Order";
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 
+import { Order } from "@/interfaces/Order";
 import TableEntries from "./table_entries";
 import TableHeader from "./table_header";
-import { update_status_all } from "@/interfaces/Order";
 import { useEffect } from "react";
 import { useOrderContext } from "@/context/order_context";
 
@@ -40,8 +41,20 @@ export default function Table() {
     const { orders, setOrders } = useOrderContext();
     
     useEffect(() => {
-      update_status_all(orders);
+      // update_status_all();
       // console.log(orders);
+      let statuses: Status[] = [];
+      orders.forEach((order) => {
+        statuses.push(update_status(order));
+      });
+      let i: number = 0;
+      let updated: Order[] = Array.from(orders);
+      updated.forEach((u_order) => {
+        u_order.status = statuses[i];
+        i++;
+      });
+      // console.log(updated);
+      setOrders(updated);
     }, []);
 
     const table = useReactTable({
