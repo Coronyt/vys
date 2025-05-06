@@ -40,7 +40,7 @@ export default function Table() {
     const { orders, setOrders } = useOrderContext();
     
     useEffect(() => {
-      // update_status_all(orders);
+      update_status_all(orders);
       // console.log(orders);
     }, []);
 

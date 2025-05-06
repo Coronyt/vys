@@ -115,10 +115,40 @@ export default function DateTimeCell(props: any) {
                 formal_time_to_datetime(formal, props.cell.getValue())
             );
             // update_status_all(orders);
+            let start_dt: DateTime = {
+                month: 0,
+                day: 0,
+                year: 0,
+                hour: 0,
+                minute: 0
+            }
+            let end_dt: DateTime = {
+                month: 0,
+                day: 0,
+                year: 0,
+                hour: 0,
+                minute: 0
+            }
+            if (props.cell.column.id == "start") { // if we are modifying the start date
+                start_dt = formal_time_to_datetime(formal, props.cell.getValue());
+                end_dt = props.row.getVisibleCells()[3].getValue();
+            }
+            if (props.cell.column.id == "end") { // if we are modifying the end date
+                start_dt = props.row.getVisibleCells()[2].getValue();
+                end_dt = formal_time_to_datetime(formal, props.cell.getValue());
+            }
+            let test: Order = {
+                name: props.row.getVisibleCells()[0].getValue(),
+                desc: "New order description",
+                res: props.row.getVisibleCells()[1].getValue(),
+                start: start_dt,
+                end: end_dt,
+                status: props.row.getVisibleCells()[4].getValue()
+            }
             props.table.options.meta.update(
                 props.row.index,
                 "status",
-                update_status(props.cell.getValue())
+                update_status(test)
             );
         } catch (error) {
             // Otherwise reset the cell display value and do not update the table
