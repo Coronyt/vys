@@ -1,12 +1,17 @@
 import DeleteOrderCell from "./del_order";
 
 export default function OrderStatusCell(props: any) {
+    
+    // console.log(props.cell.getValue());
 
     return (
         <div>
             {/* Status cell */}
-            <div className="flex justify-center">
-                status_cell
+            <div className="flex justify-center bg-amber-800 rounded-sm">
+                {props.cell.getValue() === 0 && "Pending"}
+                {props.cell.getValue() === 1 && "Scheduled"}
+                {props.cell.getValue() === 2 && "Active"}
+                {props.cell.getValue() === 3 && "Completed"}
             </div>
             {/* Delete order */}
             <div className="relative left-60 -top-7 w-10">

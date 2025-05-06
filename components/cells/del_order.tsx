@@ -12,7 +12,8 @@ export default function DeleteOrderCell(props: any) {
             desc: "New order description", // Not checking for this value
             res: props.row.getVisibleCells()[1].getValue(),
             start: props.row.getVisibleCells()[2].getValue(),
-            end: props.row.getVisibleCells()[3].getValue()
+            end: props.row.getVisibleCells()[3].getValue(),
+            status: 0 // Not checking for this value
         }
         let i: number = 0;
         let mute = Array.from(orders);

@@ -2,9 +2,10 @@
 
 import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
 
-import { Order } from "@/interfaces/Order";
 import TableEntries from "./table_entries";
 import TableHeader from "./table_header";
+import { update_status_all } from "@/interfaces/Order";
+import { useEffect } from "react";
 import { useOrderContext } from "@/context/order_context";
 
 export default function Table() {
@@ -37,6 +38,11 @@ export default function Table() {
     ]
 
     const { orders, setOrders } = useOrderContext();
+    
+    useEffect(() => {
+      update_status_all(orders);
+      // console.log(orders);
+    });
 
     const table = useReactTable({
       data: orders,

@@ -2,6 +2,7 @@
 
 import { DateTime } from "@/interfaces/DateTime";
 import { Order } from "@/interfaces/Order";
+import { Status } from "@/interfaces/Order";
 import { useOrderContext } from "@/context/order_context";
 import { useResContext } from "@/context/res_context";
 import { useRouter } from "next/navigation";
@@ -50,7 +51,8 @@ export default function OrderForm() {
       desc: desc,
       res: res,
       start: start_date_time,
-      end: end_date_time
+      end: end_date_time,
+      status: Status.PENDING
     }
     // Get current orders
     const curr = orders;

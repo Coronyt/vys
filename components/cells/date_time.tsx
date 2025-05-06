@@ -36,7 +36,7 @@ export default function DateTimeCell(props: any) {
         const formal = display_to_formal_time(timeText);
         try {
             ztime.parse(formal);
-            console.log(formal);
+            // console.log(formal);
             // After successful validation, update the value in the table
             props.table.options.meta.update(
                 props.row.index,

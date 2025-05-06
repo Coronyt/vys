@@ -14,11 +14,13 @@ export const build_date_display = (dt: DateTime): string => {
     return date_str += "-" + dt.year;
 }
 
-// TODO - Will return a time string formatted for Zod validation
-// export const build_time = (dt: DateTime): string => {
-//     let time_str = "";
-//     return time_str;
-// }
+// Will return a time string formatted for Zod validation
+export const build_time = (dt: DateTime): string => {
+    let time_str = "";
+    if (dt.hour < 10) {time_str += "0" + dt.hour;} else {time_str += dt.hour;}
+    if (dt.minute < 10) {time_str += ":0" + dt.minute;} else {time_str += ":" + dt.minute;}
+    return time_str;
+}
 
 // Will return a time string formatted for user readability
 export const build_time_display = (dt: DateTime): string => {
@@ -61,7 +63,6 @@ export const display_to_formal_date = (dis: string): string => {
     return mdy[2] + "-" + mdy[0] + "-" + mdy[1]; // Return as YYYY-MM-DD
 }
 
-// TODO
 // TODO - AM and PM designations should not be case-sensitive
 export const display_to_formal_time = (dis: string): string => {
     let h: number = Number(dis.split(" ")[0].split(":")[0]);
@@ -87,7 +88,6 @@ export const formal_date_to_datetime = (date: string, datetime: DateTime): DateT
     }
 }
 
-// TODO
 export const formal_time_to_datetime = (time: string, datetime: DateTime): DateTime => {
     return {
         month: datetime.month,
