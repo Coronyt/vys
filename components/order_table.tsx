@@ -1,15 +1,23 @@
 'use client';
 
 import { Status, update_status, update_status_all } from "@/interfaces/Order";
-import { getCoreRowModel, useReactTable } from "@tanstack/react-table";
+import { getCoreRowModel, getFilteredRowModel, useReactTable } from "@tanstack/react-table";
+import { useEffect, useState } from "react";
 
+import FilterSwitch from "./filter_switch";
 import { Order } from "@/interfaces/Order";
 import TableEntries from "./table_entries";
 import TableHeader from "./table_header";
-import { useEffect } from "react";
 import { useOrderContext } from "@/context/order_context";
 
 export default function Table() {
+
+  const [filters, setFilters] = useState([
+    // {
+    //   id: "status",
+    //   value: Status.PENDING
+    // }
+  ]);
 
     const columns = [
       {
@@ -60,7 +68,11 @@ export default function Table() {
     const table = useReactTable({
       data: orders,
       columns,
+      state: {
+        columnFilters: filters
+      },
       getCoreRowModel: getCoreRowModel(),
+      getFilteredRowModel: getFilteredRowModel(),
       meta: {
         // TODO - Add comments to this code
         update: (row_index: number, column_id: string, value: any) => {
@@ -80,6 +92,7 @@ export default function Table() {
     return (
       <div>
         <h2 className="page_title">View all orders</h2>
+        <FilterSwitch></FilterSwitch>
         <TableHeader table={table}></TableHeader>
         <TableEntries table={table}></TableEntries>
       </div>

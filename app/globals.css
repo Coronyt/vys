@@ -107,6 +107,18 @@ body {
   @apply text-4xl pb-6;
 }
 
+.filter_switch {
+  @apply flex text-lg place-self-end;
+}
+
+.filter_switch h3 {
+  @apply hover:cursor-default;
+}
+
+.filter_switch svg {
+  @apply ml-4 scale-125 hover:text-blue-400 hover:cursor-pointer transition ease-linear duration-200 hover:animate-jump;
+}
+
 .layout_primary {
   @apply bg-black min-h-screen pt-2;
 }
