@@ -80,11 +80,15 @@ body {
 }
 
 .name_input {
-  @apply border-1 ml-2 p-1 w-80 rounded-sm text-sm;
+  @apply border-1 ml-2 p-2 w-80 rounded-sm text-sm;
 }
 
 .desc_input {
   @apply border-1 ml-2 p-2 min-h-60 w-80 rounded-sm text-sm;
+}
+
+.drop {
+  @apply bg-black;
 }
 
 .table_row {
@@ -92,7 +96,7 @@ body {
 }
 
 .table_cell {
-  @apply border-b-1 border-r-1 p-3 w-60 h-12;
+  @apply border-b-1 border-r-1 p-3 w-60 h-12 hover:cursor-default;
 }
 
 .del_icon {
@@ -113,4 +117,8 @@ body {
 
 .page {
   @apply m-4 p-4 rounded-t-md animate-fade-up;
+}
+
+.disabled {
+  @apply bg-zinc-600/10 text-gray-400;
 }

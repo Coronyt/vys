@@ -82,10 +82,10 @@ export default function OrderForm() {
       </div>
       <div className="form_segment">
         <label htmlFor="desc_input">Description:</label>
-        <textarea
+        <textarea disabled
           name="desc_input"
           id="desc_input"
-          className="desc_input"
+          className="desc_input disabled"
           value={desc}
           onChange={(e) => {setDesc(e.target.value)}}
         />
@@ -95,7 +95,7 @@ export default function OrderForm() {
         <select
           name="res_input"
           id="res_input"
-          className="ml-2"
+          className="ml-2 drop"
           onChange={(e) => {setRes(e.target.value)}}
         >
           <optgroup>

@@ -26,11 +26,11 @@ export default function Table() {
       },
       {
         accessorKey: 'start',
-        header: 'Start date/time'
+        header: 'Starting'
       },
       {
         accessorKey: 'end',
-        header: 'End date/time'
+        header: 'Ending'
       },
       {
         accessorKey: 'status',

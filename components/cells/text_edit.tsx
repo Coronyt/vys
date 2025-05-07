@@ -12,6 +12,10 @@ export default function TextEditCell(props: any) {
         );
     }
 
+    // console.log(props.row.index);
+    // console.log(props.table.getCoreRowModel().rows.length - 1);
+    // console.log(props.row.index == props.table.getCoreRowModel().rows.length - 1);
+
     return (
         <div className="flex justify-center">
             <input
@@ -19,7 +23,7 @@ export default function TextEditCell(props: any) {
                 value={text}
                 onChange={(e) => {setText(e.target.value)}}
                 onBlur={blur}
-                className=""
+                className="w-80"
             />
         </div>
     );

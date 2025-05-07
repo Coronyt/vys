@@ -1,9 +1,9 @@
 import "./globals.css";
 
-import { Kode_Mono } from "next/font/google";
 import type { Metadata } from "next";
 import Navbar from "@/components/navbar";
 import { OrderContextProvider } from "@/context/order_context";
+import { Quicksand } from "next/font/google";
 import { ResContextProvider } from "@/context/res_context";
 
 export const metadata: Metadata = {
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: "",
 };
 
-const default_font = Kode_Mono();
+const default_font = Quicksand();
 
 export default function RootLayout({
   children,
@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={default_font.className}>
+      <body className={default_font.className + " font-semibold"}>
         <ResContextProvider>
           <OrderContextProvider>
             <div className="layout_primary">

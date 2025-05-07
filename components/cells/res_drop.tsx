@@ -29,7 +29,7 @@ export default function ResDropCell(props: any) {
             <select
             name="res_input"
             id="res_input"
-            className="w-56"
+            className="w-56 drop"
             onChange={(e) => {
                 props.table.options.meta.update(
                     props.row.index,
