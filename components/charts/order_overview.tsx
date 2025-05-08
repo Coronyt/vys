@@ -12,20 +12,7 @@ export default function OrderOverview() {
         value: number
     }
 
-    let data: ChartData[] = [
-      {
-        name: "Pending",
-        value: 0
-      },
-      {
-        name: "Scheduled",
-        value: 0
-      },
-      {
-        name: "Active",
-        value: 0
-      }
-    ]
+    let data: ChartData[] = []
 
     const colors = [
       "#730424",
@@ -36,7 +23,25 @@ export default function OrderOverview() {
     const [chartData, setChartData] = useState(data);
     const { orders, setOrders } = useOrderContext();
 
+    const init_data = () => {
+      data = [
+        {
+          name: "Pending",
+          value: 0
+        },
+        {
+          name: "Scheduled",
+          value: 0
+        },
+        {
+          name: "Active",
+          value: 0
+        }
+      ]
+    }
+
     useEffect(() => {
+      init_data();
       orders.forEach((order) => {
         if (order.status == 0) {data[0].value++}
         if (order.status == 1) {data[1].value++}
@@ -47,8 +52,8 @@ export default function OrderOverview() {
 
     return (
       <div>
-        <ResponsiveContainer width={730} height={250}>
-          <PieChart width={730} height={250}>
+        <ResponsiveContainer width={400} height={250}>
+          <PieChart width={400} height={250}>
             <Tooltip />
             <Legend formatter={(value, entry, index) => (<span className="text-white">{value}</span>)} />
             <Pie data={chartData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={100}>

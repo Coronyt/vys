@@ -1,4 +1,5 @@
 import OrderOverview from "@/components/charts/order_overview";
+import ResourceOverview from "@/components/charts/res_overview";
 
 export default function Dash() {
   return (
@@ -6,7 +7,10 @@ export default function Dash() {
       <h2 className="page_title">
         Dashboard
       </h2>
-      <OrderOverview />
+      <div className="flex">
+        <OrderOverview />
+        <ResourceOverview />
+      </div>
     </div>
   );
 }
