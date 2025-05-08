@@ -68,7 +68,6 @@ export default function Table() {
       accessorKey: 'status',
       header: 'Status',
       accessorFn: (row: any) => {
-        console.log(`${row.status}`);
         return `${row.status}`;
       }
     }

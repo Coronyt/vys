@@ -1,5 +1,6 @@
 import OrderOverview from "@/components/charts/order_overview";
 import ResourceOverview from "@/components/charts/res_overview";
+import YearlyOverview from "@/components/charts/yearly_overview";
 
 export default function Dash() {
   return (
@@ -10,6 +11,9 @@ export default function Dash() {
       <div className="flex">
         <OrderOverview />
         <ResourceOverview />
+      </div>
+      <div>
+        <YearlyOverview />
       </div>
     </div>
   );
