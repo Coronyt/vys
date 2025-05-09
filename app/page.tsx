@@ -8,12 +8,24 @@ export default function Dash() {
       <h2 className="page_title">
         Dashboard
       </h2>
-      <div className="flex">
-        <OrderOverview />
-        <ResourceOverview />
-      </div>
-      <div>
-        <YearlyOverview />
+      <div className="border-1 p-4 rounded-3xl">
+        <div className="pb-4">
+          <h2 className="text-xl">Currently tracking 0 lifetime orders</h2>
+          <h2 className="text-xl">There are currently 0 active orders using 0% of available resources</h2>
+        </div>
+        <div className="pb-4">
+          <div className="border-1 p-6 rounded-xl">
+            <YearlyOverview />
+          </div>
+        </div>
+        <div className="flex justify-between">
+          <div className="border-1 mr-2 rounded-xl">
+            <OrderOverview />
+          </div>
+          <div className="border-1 ml-2 rounded-xl">
+            <ResourceOverview />
+          </div>
+        </div>
       </div>
     </div>
   );

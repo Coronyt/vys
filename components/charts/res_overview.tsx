@@ -58,6 +58,9 @@ export default function ResourceOverview() {
             </Pie>
           </PieChart>
         </ResponsiveContainer>
+        <div className="flex justify-center">
+            <h2 className="text-lg -mt-2 mb-4">Resource usage across lifetime orders</h2>
+        </div>
       </div>
     );
   }

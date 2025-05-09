@@ -55,7 +55,6 @@ export default function YearlyOverview() {
 
   return (
     <div>
-        yearly_overview
         <ResponsiveContainer width="100%" height={250}>
             <BarChart data={chartData}>
                 <XAxis dataKey="name"/>
@@ -67,6 +66,9 @@ export default function YearlyOverview() {
                 <Bar stackId="a" dataKey="completed" fill="#ffffff" />
             </BarChart>
         </ResponsiveContainer>
+        <div className="flex justify-center">
+            <h2 className="text-lg mt-2">Order overview (organized by start date and status)</h2>
+        </div>
     </div>
   );
 }

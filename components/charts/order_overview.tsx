@@ -55,12 +55,15 @@ export default function OrderOverview() {
         <ResponsiveContainer width={400} height={250}>
           <PieChart width={400} height={250}>
             <Tooltip />
-            <Legend formatter={(value, entry, index) => (<span className="text-white">{value}</span>)} />
+            {/* <Legend formatter={(value, entry, index) => (<span className="text-white">{value}</span>)} /> */}
             <Pie data={chartData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={100}>
               {chartData.map((entry, index) => (<Cell key={`cell-${index}`} fill={colors[index]} />))}
             </Pie>
           </PieChart>
         </ResponsiveContainer>
+        <div className="flex justify-center">
+            <h2 className="text-lg -mt-2 mb-4">Non-completed orders by status</h2>
+        </div>
       </div>
     );
   }
