@@ -13,6 +13,8 @@ test('order_create_1', async ({ page }) => {
     await page.getByTestId("res_input").selectOption("Nakamichi Dragon 1");
     await page.getByTestId("start_date_input").fill("2028-11-11");
     await page.getByTestId("start_time_input").fill("11:00");
+    await page.getByTestId("end_date_input").fill("2029-11-11");
+    await page.getByTestId("end_time_input").fill("11:00");
     await page.getByTestId("submit").click();
     // Submission redirects to order inspector
     await expect(page.getByTestId("page_title")).toHaveText(/View all orders/);
@@ -21,35 +23,43 @@ test('order_create_1', async ({ page }) => {
     await expect(page.getByTestId("res_cell_0")).toHaveValue(/deck1/); // Nakamichi Dragon 1
     await expect(page.getByTestId("start_date_cell_0")).toHaveValue(/11-11-2028/);
     await expect(page.getByTestId("start_time_cell_0")).toHaveValue(/11:00 AM/);
-    await expect(page.getByTestId("status_cell_0")).toHaveText(/Pending/);
+    await expect(page.getByTestId("end_date_cell_0")).toHaveValue(/11-11-2029/);
+    await expect(page.getByTestId("end_time_cell_0")).toHaveValue(/11:00 AM/);
+    await expect(page.getByTestId("status_cell_0")).toHaveText(/Scheduled/);
 });
 
-// Order creation with invalid start/end date/times
+// Order creation with invalid start/end dates
 test('order_create_2', async ({ page }) => {
     // Navigate to order creation
     await page.goto('http://localhost:3000/create');
     // Attempt to create order with invalid start date
-        // TODO
+    await page.getByTestId("name_input").fill("order_create_2");
+    await page.getByTestId("start_date_input").fill("99999-11-11");
+    await page.getByTestId("start_time_input").fill("11:00");
+    await page.getByTestId("end_date_input").fill("2029-11-11");
+    await page.getByTestId("end_time_input").fill("11:00");
+    await page.getByTestId("submit").click();
     // Verify error message
-        // TODO
-    // Attempt to create order with invalid start time
-        // TODO
-    // Verify error message
-        // TODO
+    await expect(page.getByTestId("error_msg")).toHaveText(/Invalid date/);
     // Attempt to create order with invalid end date
-        // TODO
+    await page.getByTestId("start_date_input").fill("2028-11-11");
+    await page.getByTestId("end_date_input").fill("12345-01-01");
+    await page.getByTestId("submit").click();
     // Verify error message
-        // TODO
-    // Attempt to create order with invalid end time
-        // TODO
-    // Verify error message
-        // TODO
+    await expect(page.getByTestId("error_msg")).toHaveText(/Invalid date/);
     // Passing valid data
-        // TODO
+    await page.getByTestId("end_date_input").fill("2029-11-11");
     // Redirect to inspector
-        // TODO
+    await page.getByTestId("submit").click();
+    await expect(page.getByTestId("page_title")).toHaveText(/View all orders/);
     // Verify new entry exists in table
-        // TODO
+    await expect(page.getByTestId("name_cell_0")).toHaveValue(/order_create_2/);
+    await expect(page.getByTestId("res_cell_0")).toHaveValue(/press1/); // Default
+    await expect(page.getByTestId("start_date_cell_0")).toHaveValue(/11-11-2028/);
+    await expect(page.getByTestId("start_time_cell_0")).toHaveValue(/11:00 AM/);
+    await expect(page.getByTestId("end_date_cell_0")).toHaveValue(/11-11-2029/);
+    await expect(page.getByTestId("end_time_cell_0")).toHaveValue(/11:00 AM/);
+    await expect(page.getByTestId("status_cell_0")).toHaveText(/Scheduled/);
 });
 
 // Attempting order creation with chronologically impossible dates
@@ -57,26 +67,61 @@ test('order_create_3', async ({ page }) => {
     // Navigate to order creation
     await page.goto('http://localhost:3000/create');
     // Fill in with valid start date and time
-        // TODO
+    await page.getByTestId("name_input").fill("order_create_3");
+    await page.getByTestId("start_date_input").fill("2028-11-11");
+    await page.getByTestId("start_time_input").fill("12:00");
     // Fill in with impossible end date (before start)
-        // TODO
+    await page.getByTestId("end_date_input").fill("2027-11-11");
+    await page.getByTestId("end_time_input").fill("12:00");
     // Attempt to submit form with invalid dates
-        // TODO
+    await page.getByTestId("submit").click();
     // Verify error message
-        // TODO
+    await expect(page.getByTestId("error_msg")).toHaveText(/End date must be after start date/);
     // Fill in valid end date
-        // TODO
-    // Change to impossible start date (before end)
-        // TODO
-    // Attempt to submit form with invalid dates
-        // TODO
-    // Verify error message
-        // TODO
+    await page.getByTestId("end_date_input").fill("2029-11-11");
+    // Submit and verify new order
+    await page.getByTestId("submit").click();
+    await expect(page.getByTestId("page_title")).toHaveText(/View all orders/);
+    await expect(page.getByTestId("name_cell_0")).toHaveValue(/order_create_3/);
+    await expect(page.getByTestId("res_cell_0")).toHaveValue(/press1/); // Default
+    await expect(page.getByTestId("start_date_cell_0")).toHaveValue(/11-11-2028/);
+    await expect(page.getByTestId("start_time_cell_0")).toHaveValue(/12:00 PM/);
+    await expect(page.getByTestId("end_date_cell_0")).toHaveValue(/11-11-2029/);
+    await expect(page.getByTestId("end_time_cell_0")).toHaveValue(/12:00 PM/);
+    await expect(page.getByTestId("status_cell_0")).toHaveText(/Scheduled/);
 });
 
+// Creating an order with the same start/end date but impossible start/end times
+test('order_create_4', async ({ page }) => {
+    // Navigate to order creation
+    await page.goto('http://localhost:3000/create');
+    // Fill in with valid start date and time
+    await page.getByTestId("name_input").fill("order_create_4");
+    await page.getByTestId("start_date_input").fill("2028-11-11");
+    await page.getByTestId("start_time_input").fill("12:00");
+    // Fill in with impossible end date (before start)
+    await page.getByTestId("end_date_input").fill("2028-11-11");
+    await page.getByTestId("end_time_input").fill("11:00");
+    // Attempt to submit form with invalid dates
+    await page.getByTestId("submit").click();
+    // Verify error message
+    await expect(page.getByTestId("error_msg")).toHaveText(/End time must be after start time/);
+    // Fill in valid end time
+    await page.getByTestId("end_time_input").fill("13:00");
+    // Submit and verify new order
+    await page.getByTestId("submit").click();
+    await expect(page.getByTestId("page_title")).toHaveText(/View all orders/);
+    await expect(page.getByTestId("name_cell_0")).toHaveValue(/order_create_4/);
+    await expect(page.getByTestId("res_cell_0")).toHaveValue(/press1/); // Default
+    await expect(page.getByTestId("start_date_cell_0")).toHaveValue(/11-11-2028/);
+    await expect(page.getByTestId("start_time_cell_0")).toHaveValue(/12:00 PM/);
+    await expect(page.getByTestId("end_date_cell_0")).toHaveValue(/11-11-2028/);
+    await expect(page.getByTestId("end_time_cell_0")).toHaveValue(/01:00 PM/);
+    await expect(page.getByTestId("status_cell_0")).toHaveText(/Scheduled/);
+});
 
 // Creating a default order w/ no data and adding data afterwards via the Table
-test('order_create_4', async ({ page }) => {
+test('order_create_5', async ({ page }) => {
     // Navigate to order creation
     await page.goto('http://localhost:3000/create');
     // Create a new order with no information
@@ -108,7 +153,7 @@ test('order_create_4', async ({ page }) => {
 });
 
 // Creating a default order and passing invalid or impossible start/end date/times via the Table
-test('order_create_5', async ({ page }) => {
+test('order_create_6', async ({ page }) => {
     // Navigate to order creation
     await page.goto('http://localhost:3000/create');
     // Create a new order with no information

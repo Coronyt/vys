@@ -7,6 +7,7 @@ import { useOrderContext } from "@/context/order_context";
 import { useResContext } from "@/context/res_context";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { z } from "zod";
 
 export default function OrderForm() {
 
@@ -25,55 +26,81 @@ export default function OrderForm() {
   const [end_date, setEndDate] = useState("");
   const [end_time, setEndTime] = useState("");
 
+  const [error, setError] = useState("");
+
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     // TODO - Perform validations here
+    const zdate = z.string().date();
+    const ztime = z.string().time();
+    try {
+      // TODO - Account for pending orders (if no input was given)
+        // Also need to implement MM-DD-YYYY default display for Table
       // Is the start date valid?
+      zdate.parse(start_date);
       // Is the start time valid?
+      ztime.parse(start_time);
       // Is the end date valid?
+      zdate.parse(end_date);
       // Is the end time valid?
+      ztime.parse(end_time);
       // Is the end date/time after the start date/time?
-    // If inputs do not validate, throw and catch an error
+      if (start_date == end_date) {
+        if (start_time > end_time) {
+          throw new Error("End time must be after start time");
+        }
+      }
+      else if (start_date > end_date) {
+        throw new Error("End date must be after start date");
+      }
+      // ___
+      // Loading start date/time information into DateTime object
+      const start_date_arr = start_date.split("-"); // [0] = year, [1] = month, [2] = day
+      const start_time_arr = start_time.split(":"); // [0] = hour, [1] = minute
+      const start_date_time: DateTime = {
+        month: Number(start_date_arr[1]),
+        day: Number(start_date_arr[2]),
+        year: Number(start_date_arr[0]),
+        hour: Number(start_time_arr[0]),
+        minute: Number(start_time_arr[1])
+      } // Loading end date/time information into DateTime object
+      const end_date_arr = end_date.split("-"); // [0] = year, [1] = month, [2] = day
+      const end_time_arr = end_time.split(":"); // [0] = hour, [1] = minute
+      const end_date_time: DateTime = {
+        month: Number(end_date_arr[1]),
+        day: Number(end_date_arr[2]),
+        year: Number(end_date_arr[0]),
+        hour: Number(end_time_arr[0]),
+        minute: Number(end_time_arr[1])
+      } // Loading all order information into Order object
+      const new_order: Order = {
+        name: name,
+        desc: desc,
+        res: res,
+        start: start_date_time,
+        end: end_date_time,
+        status: Status.PENDING
+      }
+      // Get current orders
+      const curr = orders;
+      // Append to array
+      curr.push(new_order);
+      // Hand to context
+        // Eventually the orders will be stored locally through a JSON server
+        // In the final iteration, the orders will be organized into a SQL database
+      setOrders(curr);
+      // Redirect to table
+      router.push("/inspect");
+    } catch (err: any) {
+      if (err.issues) { // ZodError
+        setError(err.issues[0].message);
+      } else { // Custom error
+        setError(err.message);
+      }
+      // If inputs do not validate, throw and catch an error
       // Save the error info to local state and display on page conditionally
-        // Assign conditional element(s) testID values so Playwright can check them
-    //___
-    // Loading start date/time information into DateTime object
-    const start_date_arr = start_date.split("-"); // [0] = year, [1] = month, [2] = day
-    const start_time_arr = start_time.split(":"); // [0] = hour, [1] = minute
-    const start_date_time: DateTime = {
-      month: Number(start_date_arr[1]),
-      day: Number(start_date_arr[2]),
-      year: Number(start_date_arr[0]),
-      hour: Number(start_time_arr[0]),
-      minute: Number(start_time_arr[1])
-    } // Loading end date/time information into DateTime object
-    const end_date_arr = end_date.split("-"); // [0] = year, [1] = month, [2] = day
-    const end_time_arr = end_time.split(":"); // [0] = hour, [1] = minute
-    const end_date_time: DateTime = {
-      month: Number(end_date_arr[1]),
-      day: Number(end_date_arr[2]),
-      year: Number(end_date_arr[0]),
-      hour: Number(end_time_arr[0]),
-      minute: Number(end_time_arr[1])
-    } // Loading all order information into Order object
-    const new_order: Order = {
-      name: name,
-      desc: desc,
-      res: res,
-      start: start_date_time,
-      end: end_date_time,
-      status: Status.PENDING
+      // Assign conditional element(s) testID values so Playwright can check them
     }
-    // Get current orders
-    const curr = orders;
-    // Append to array
-    curr.push(new_order);
-    // Hand to context
-      // Eventually the orders will be stored locally through a JSON server
-      // In the final iteration, the orders will be organized into a SQL database
-    setOrders(curr);
-    // Redirect to table
-    router.push("/inspect");
   }
 
   return (
@@ -168,6 +195,11 @@ export default function OrderForm() {
       <div className="form_submit">
         <input type="submit" value="Create order" data-testid="submit"/>
       </div>
+      {error &&
+        <div className="error" data-testid="error_msg">
+          {`${error}`}
+        </div>
+      }
     </form>
   );
 }

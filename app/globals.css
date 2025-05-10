@@ -131,6 +131,10 @@ body {
   @apply m-4 p-4 rounded-t-md animate-fade-up;
 }
 
+.error {
+  @apply text-red-600;
+}
+
 .disabled {
   @apply bg-zinc-600/10 text-gray-400;
 }
