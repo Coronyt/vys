@@ -13,7 +13,7 @@ export default function OrderStatusCell(props: any) {
                 ${status == "1" ? "bg-blue-600/50" : ""}
                 ${status == "2" ? "bg-lime-600/50" : ""}
                 ${status == "3" ? "bg-zinc-600/25" : ""}
-            `}>
+            `} data-testid={`status_cell_${props.row.index}`}>
                 {status === "0" && "Pending"}
                 {status === "1" && "Scheduled"}
                 {status === "2" && "Active"}

@@ -27,6 +27,16 @@ export default function OrderForm() {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
+    // TODO - Perform validations here
+      // Is the start date valid?
+      // Is the start time valid?
+      // Is the end date valid?
+      // Is the end time valid?
+      // Is the end date/time after the start date/time?
+    // If inputs do not validate, throw and catch an error
+      // Save the error info to local state and display on page conditionally
+        // Assign conditional element(s) testID values so Playwright can check them
+    //___
     // Loading start date/time information into DateTime object
     const start_date_arr = start_date.split("-"); // [0] = year, [1] = month, [2] = day
     const start_time_arr = start_time.split(":"); // [0] = hour, [1] = minute
@@ -68,7 +78,7 @@ export default function OrderForm() {
 
   return (
     <form className="order_form" onSubmit={(e) => submit(e)}>
-      <h2 className="page_title">Create a new order</h2>
+      <h2 className="page_title" data-testid="page_title">Create a new order</h2>
       <div className="form_segment">
         <label htmlFor="name_input">Order name:</label>
         <input
@@ -78,6 +88,7 @@ export default function OrderForm() {
           className="name_input"
           value={name}
           onChange={(e) => {setName(e.target.value)}}
+          data-testid="name_input"
         />
       </div>
       <div className="form_segment">
@@ -97,6 +108,7 @@ export default function OrderForm() {
           id="res_input"
           className="ml-2 drop"
           onChange={(e) => {setRes(e.target.value)}}
+          data-testid="res_input"
         >
           <optgroup>
             {resources.map((element, index) => {return <option key={index} value={element.id}>{element.name}</option>})}
@@ -111,8 +123,8 @@ export default function OrderForm() {
             name="start_date_input"
             id="start_date_input"
             value={start_date}
+            data-testid="start_date_input"
             onChange={(e) =>{
-              // console.log(e.target.value);
               setStartDate(e.target.value);
             }}
           />
@@ -121,8 +133,8 @@ export default function OrderForm() {
             name="start_time_input"
             id="start_time_input"
             value={start_time}
+            data-testid="start_time_input"
             onChange={(e) =>{
-              // console.log(e.target.value);
               setStartTime(e.target.value);
             }}
           />
@@ -136,8 +148,8 @@ export default function OrderForm() {
             name="end_date_input"
             id="end_date_input"
             value={end_date}
+            data-testid="end_date_input"
             onChange={(e) =>{
-              // console.log(e.target.value);
               setEndDate(e.target.value);
             }}
           />
@@ -146,15 +158,15 @@ export default function OrderForm() {
             name="end_time_input"
             id="end_time_input"
             value={end_time}
+            data-testid="end_time_input"
             onChange={(e) =>{
-              // console.log(e.target.value);
               setEndTime(e.target.value);
             }}
           />
         </div>
       </div>
       <div className="form_submit">
-        <input type="submit" value="Create order"/>
+        <input type="submit" value="Create order" data-testid="submit"/>
       </div>
     </form>
   );

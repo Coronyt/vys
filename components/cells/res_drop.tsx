@@ -30,6 +30,7 @@ export default function ResDropCell(props: any) {
             name="res_input"
             id="res_input"
             className="w-56 drop"
+            data-testid={`res_cell_${props.row.index}`}
             onChange={(e) => {
                 props.table.options.meta.update(
                     props.row.index,

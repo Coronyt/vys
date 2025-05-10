@@ -164,6 +164,7 @@ export default function DateTimeCell(props: any) {
                 onChange={(e) => {setDateText(e.target.value)}}
                 onBlur={blur_date}
                 className="w-24 text-center"
+                data-testid={props.cell.column.id == "start" ? `start_date_cell_${props.row.index}` : `end_date_cell_${props.row.index}`}
             />
             <div className="w-2" />
             <input
@@ -172,6 +173,7 @@ export default function DateTimeCell(props: any) {
                 onChange={(e) => {setTimeText(e.target.value)}}
                 onBlur={blur_time}
                 className="w-24 text-center"
+                data-testid={props.cell.column.id == "start" ? `start_time_cell_${props.row.index}` : `end_time_cell_${props.row.index}`}
             />
         </div>
     );

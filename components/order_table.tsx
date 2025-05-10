@@ -118,7 +118,7 @@ export default function Table() {
 
   return (
     <div>
-      <h2 className="page_title">View all orders</h2>
+      <h2 className="page_title" data-testid="page_title">View all orders</h2>
       <FilterSwitch cycle={cycle_filter} />
       <TableHeader table={table}></TableHeader>
       <TableEntries table={table}></TableEntries>

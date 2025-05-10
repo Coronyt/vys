@@ -5,7 +5,7 @@ import YearlyOverview from "@/components/charts/yearly_overview";
 export default function Dash() {
   return (
     <div className="page">
-      <h2 className="page_title">
+      <h2 className="page_title" data-testid="page_title">
         Dashboard
       </h2>
       <div className="border-1 p-4 rounded-3xl">
