@@ -147,6 +147,36 @@ export default function DateTimeCell(props: any) {
         try {
             ztime.parse(formal);
             // console.log(formal);
+            // ___
+            if (props.cell.column.id == "start") {
+                let start_js_date = build_date(props.row.getVisibleCells()[2].getValue());
+                let end_js_date = build_date(props.row.getVisibleCells()[3].getValue());
+                // Both start and end dates must exist before times will be compared
+                if (!Number.isNaN(new Date(start_js_date).getMonth()) && !Number.isNaN(new Date(end_js_date).getMonth())) {
+                    if (new Date(start_js_date).valueOf() == new Date(end_js_date).valueOf()) {
+                        let start_js_time = build_time(formal_time_to_datetime(formal, props.cell.getValue()));
+                        let end_js_time = build_time(props.row.getVisibleCells()[3].getValue());
+                        if (new Date(start_js_date + " " + start_js_time) >= new Date(end_js_date + " " + end_js_time)) {
+                            throw new Error("Start time must be before end time");
+                        }
+                    }
+                }
+            }
+            if (props.cell.column.id == "end") {
+                let start_js_date = build_date(props.row.getVisibleCells()[2].getValue());
+                let end_js_date = build_date(props.row.getVisibleCells()[3].getValue());
+                // Both start and end dates must exist before times will be compared
+                if (!Number.isNaN(new Date(start_js_date).getMonth()) && !Number.isNaN(new Date(end_js_date).getMonth())) {
+                    if (new Date(start_js_date).valueOf() == new Date(end_js_date).valueOf()) {
+                        let start_js_time = build_time(props.row.getVisibleCells()[2].getValue());
+                        let end_js_time = build_time(formal_time_to_datetime(formal, props.cell.getValue()));
+                        if (new Date(end_js_date + " " + end_js_time) <= new Date(start_js_date + " " + start_js_time)) {
+                            throw new Error("End time must be after start time");
+                        }
+                    }
+                }
+            }
+            // ___
             // After successful validation, update the value in the table
             props.table.options.meta.update(
                 props.row.index,
@@ -189,10 +219,14 @@ export default function DateTimeCell(props: any) {
                 "status",
                 update_status(test)
             );
-        } catch (error: any) {
+        } catch (err: any) {
+            if (err.issues) {
+                props.setError(err.issues[0].message);
+            } else {
+                props.setError(err.message);
+            }
             // Otherwise reset the cell display value and do not update the table
             setTimeText(original_time);
-            props.setError(error.issues[0].message);
         }
     }
 
