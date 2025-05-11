@@ -176,37 +176,65 @@ test('order_create_6', async ({ page }) => {
     await page.getByTestId("start_date_cell_0").fill("asdfasdfasdf");
     await page.getByTestId("page_title").click();
     // Verify error message
-    await expect(page.getByTestId("error_msg")).toHaveText(/Invalid date/);
+    await expect(page.getByTestId("error_msg")).toHaveText("Date must be formatted as MM-DD-YYYY");
     // Attempt to add invalid start time
     await page.getByTestId("start_time_cell_0").clear();
     await page.getByTestId("start_time_cell_0").fill("wigwam");
     await page.getByTestId("page_title").click();
     // Verify error message
-    await expect(page.getByTestId("error_msg")).toHaveText(/Invalid time/);
+    await expect(page.getByTestId("error_msg")).toHaveText("Time must be formatted as HH:MM AM/PM");
     // Attempt to add invalid end date
     await page.getByTestId("end_date_cell_0").clear();
     await page.getByTestId("end_date_cell_0").fill("asdfasdfasdf");
     await page.getByTestId("page_title").click();
     // Verify error message
-    await expect(page.getByTestId("error_msg")).toHaveText(/Invalid date/);
+    await expect(page.getByTestId("error_msg")).toHaveText("Date must be formatted as MM-DD-YYYY");
     // Attempt to add invalid end time
     await page.getByTestId("end_time_cell_0").clear();
     await page.getByTestId("end_time_cell_0").fill("wigwam");
     await page.getByTestId("page_title").click();
     // Verify error message
-     await expect(page.getByTestId("error_msg")).toHaveText(/Invalid time/);
+     await expect(page.getByTestId("error_msg")).toHaveText("Time must be formatted as HH:MM AM/PM");
     // Add valid start date/time
-        // TODO
+    await page.getByTestId("start_date_cell_0").clear();
+    await page.getByTestId("start_date_cell_0").fill("11-11-2028");
+    await page.getByTestId("start_time_cell_0").clear();
+    await page.getByTestId("start_time_cell_0").fill("12:00 PM");
+    await page.getByTestId("page_title").click();
     // Attempt to add impossible end date/time (before start)
-        // TODO
+    await page.getByTestId("end_date_cell_0").clear();
+    await page.getByTestId("end_date_cell_0").fill("11-10-2028");
+    await page.getByTestId("page_title").click();
     // Verify error message
-        // TODO
+    await expect(page.getByTestId("error_msg")).toHaveText("End date must be after start date");
     // Add valid end date/time
-        // TODO
-    // Attempt to change start date/time to impossible (after end)
-        // TODO
-    // Verify error message
-        // TODO
+    await page.getByTestId("end_date_cell_0").clear();
+    await page.getByTestId("end_date_cell_0").fill("11-12-2028");
+    await page.getByTestId("end_time_cell_0").clear();
+    await page.getByTestId("end_time_cell_0").fill("1:00 PM");
+    await page.getByTestId("page_title").click();
     // Verify status "Scheduled"
-        // TODO
+    await expect(page.getByTestId("status_cell_0")).toHaveText(/Scheduled/);
+    // Attempt to change start date/time to impossible (after end)
+    await page.getByTestId("start_date_cell_0").clear();
+    await page.getByTestId("start_date_cell_0").fill("11-13-2028");
+    await page.getByTestId("page_title").click();
+    // Verify error message
+    await expect(page.getByTestId("error_msg")).toHaveText("Start date must be before end date");
+    // Set start date and end date to same day
+    await page.getByTestId("start_date_cell_0").clear();
+    await page.getByTestId("start_date_cell_0").fill("11-12-2028");
+    await page.getByTestId("page_title").click();
+    // Attempt to set start time as after end time on same day
+    await page.getByTestId("start_time_cell_0").clear();
+    await page.getByTestId("start_time_cell_0").fill("2:00 PM");
+    await page.getByTestId("page_title").click();
+    // Verify error message
+    await expect(page.getByTestId("error_msg")).toHaveText("Start time must be before end time");
+    // Attempt to set end time as before start time on same day
+    await page.getByTestId("end_time_cell_0").clear();
+    await page.getByTestId("end_time_cell_0").fill("11:00 AM");
+    await page.getByTestId("page_title").click();
+    // Verify error message
+    await expect(page.getByTestId("error_msg")).toHaveText("End time must be after start time");
 });
