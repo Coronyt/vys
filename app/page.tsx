@@ -1,3 +1,4 @@
+import DashHeaders from "@/components/dash_headers";
 import OrderOverview from "@/components/charts/order_overview";
 import ResourceOverview from "@/components/charts/res_overview";
 import YearlyOverview from "@/components/charts/yearly_overview";
@@ -9,10 +10,7 @@ export default function Dash() {
         Dashboard
       </h2>
       <div className="border-1 p-4 rounded-3xl">
-        <div className="pb-4">
-          <h2 className="text-xl">Currently tracking 0 lifetime orders</h2>
-          <h2 className="text-xl">There are currently 0 active orders using 0% of available resources</h2>
-        </div>
+        <DashHeaders />
         <div className="pb-4">
           <div className="border-1 p-6 rounded-xl">
             <YearlyOverview />
