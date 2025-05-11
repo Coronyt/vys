@@ -11,14 +11,30 @@ import { z } from "zod";
 
 export default function DateTimeCell(props: any) {
 
+    const date_text_gen = (): string => {
+        const date_display = build_date_display(props.cell.getValue());
+        if (date_display == "NaN-NaN-0") {
+            return "MM-DD-YYYY";
+        }
+        return date_display;
+    }
+
+    const time_text_gen = (): string => {
+        const time_display = build_time_display(props.cell.getValue());
+        if (time_display == "12:NaN AM") {
+            return "HH:MM AM";
+        }
+        return time_display;
+    }
+
     const zdate = z.string().date();
     const ztime = z.string().time();
 
-    const original_date = build_date_display(props.cell.getValue());
-    const [dateText, setDateText] = useState(build_date_display(props.cell.getValue()));
+    const original_date = date_text_gen();
+    const [dateText, setDateText] = useState(date_text_gen());
 
-    const original_time = build_time_display(props.cell.getValue());
-    const [timeText, setTimeText] = useState(build_time_display(props.cell.getValue()));
+    const original_time = time_text_gen();
+    const [timeText, setTimeText] = useState(time_text_gen());
 
     // const { orders, setOrders } = useOrderContext();
 
@@ -163,7 +179,7 @@ export default function DateTimeCell(props: any) {
                 value={dateText}
                 onChange={(e) => {setDateText(e.target.value)}}
                 onBlur={blur_date}
-                className="w-24 text-center"
+                className="w-26 text-center"
                 data-testid={props.cell.column.id == "start" ? `start_date_cell_${props.row.index}` : `end_date_cell_${props.row.index}`}
             />
             <div className="w-2" />
@@ -172,7 +188,7 @@ export default function DateTimeCell(props: any) {
                 value={timeText}
                 onChange={(e) => {setTimeText(e.target.value)}}
                 onBlur={blur_time}
-                className="w-24 text-center"
+                className="w-26 text-center"
                 data-testid={props.cell.column.id == "start" ? `start_time_cell_${props.row.index}` : `end_time_cell_${props.row.index}`}
             />
         </div>

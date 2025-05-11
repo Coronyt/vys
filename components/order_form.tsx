@@ -30,28 +30,35 @@ export default function OrderForm() {
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO - Perform validations here
     const zdate = z.string().date();
     const ztime = z.string().time();
     try {
-      // TODO - Account for pending orders (if no input was given)
-        // Also need to implement MM-DD-YYYY default display for Table
       // Is the start date valid?
-      zdate.parse(start_date);
-      // Is the start time valid?
-      ztime.parse(start_time);
-      // Is the end date valid?
-      zdate.parse(end_date);
-      // Is the end time valid?
-      ztime.parse(end_time);
-      // Is the end date/time after the start date/time?
-      if (start_date == end_date) {
-        if (start_time > end_time) {
-          throw new Error("End time must be after start time");
-        }
+      if (start_date) {
+        zdate.parse(start_date);
       }
-      else if (start_date > end_date) {
-        throw new Error("End date must be after start date");
+      // Is the start time valid?
+      if (start_time) {
+        ztime.parse(start_time);
+      }
+      // Is the end date valid?
+      if (end_date) {
+        zdate.parse(end_date);
+      }
+      // Is the end time valid?
+      if (end_time) {
+        ztime.parse(end_time);
+      }
+      if (start_date && start_time && end_date && end_time) {
+        // Is the end date/time after the start date/time?
+        if (start_date == end_date) {
+          if (start_time > end_time) {
+            throw new Error("End time must be after start time");
+          }
+        }
+        else if (start_date > end_date) {
+          throw new Error("End date must be after start date");
+        }
       }
       // ___
       // Loading start date/time information into DateTime object

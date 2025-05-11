@@ -1,6 +1,6 @@
 'use client';
 
-import { Status, update_status, update_status_all } from "@/interfaces/Order";
+import { Status, update_status } from "@/interfaces/Order";
 import { getCoreRowModel, getFilteredRowModel, useReactTable } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 
@@ -11,6 +11,8 @@ import TableHeader from "./table_header";
 import { useOrderContext } from "@/context/order_context";
 
 export default function Table() {
+
+  const [error, setError] = useState("");
 
   const [columnFilters, setColumnFilters] = useState([
     {
@@ -76,8 +78,6 @@ export default function Table() {
   const { orders, setOrders } = useOrderContext();
   
   useEffect(() => {
-    // update_status_all();
-    // console.log(orders);
     let statuses: Status[] = [];
     orders.forEach((order) => {
       statuses.push(update_status(order));
@@ -88,7 +88,6 @@ export default function Table() {
       u_order.status = statuses[i];
       i++;
     });
-    // console.log(updated);
     setOrders(updated);
   }, []);
 
@@ -119,9 +118,16 @@ export default function Table() {
   return (
     <div>
       <h2 className="page_title" data-testid="page_title">View all orders</h2>
-      <FilterSwitch cycle={cycle_filter} />
+      <div className="flex justify-between">
+        {!error &&
+          <div className="error text-xl pt-0.5">
+            Test error message
+          </div>
+        }
+        <FilterSwitch cycle={cycle_filter} />
+      </div>
       <TableHeader table={table}></TableHeader>
-      <TableEntries table={table}></TableEntries>
+      <TableEntries table={table} setError={setError}></TableEntries>
     </div>
   );
 }
