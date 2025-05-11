@@ -119,11 +119,12 @@ export default function Table() {
     <div>
       <h2 className="page_title" data-testid="page_title">View all orders</h2>
       <div className="flex justify-between">
-        {!error &&
-          <div className="error text-xl pt-0.5">
-            Test error message
+        {error &&
+          <div className="error text-xl pt-0.5" data-testid="error_msg">
+            {error}
           </div>
         }
+        {!error && <div></div>}
         <FilterSwitch cycle={cycle_filter} />
       </div>
       <TableHeader table={table}></TableHeader>

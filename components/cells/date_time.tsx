@@ -1,4 +1,4 @@
-import { DateTime, build_date, build_date_display, build_time_display, display_to_formal_date, display_to_formal_time, formal_date_to_datetime, formal_time_to_datetime } from "@/interfaces/DateTime";
+import { DateTime, build_date, build_date_display, build_time, build_time_display, display_to_formal_date, display_to_formal_time, formal_date_to_datetime, formal_time_to_datetime } from "@/interfaces/DateTime";
 import { Status, update_status, update_status_all } from "@/interfaces/Order";
 
 import { Order } from "@/interfaces/Order";
@@ -49,6 +49,24 @@ export default function DateTimeCell(props: any) {
         const formal = display_to_formal_date(dateText);
         try {
             zdate.parse(formal);
+            if (props.cell.column.id == "start") {
+                let start_js_date = build_date(formal_date_to_datetime(formal, props.cell.getValue()));
+                let end_js_date = build_date(props.row.getVisibleCells()[3].getValue());
+                if (!Number.isNaN(new Date(end_js_date).getMonth())) {
+                    if (new Date(start_js_date) > new Date(end_js_date)) {
+                        throw new Error("Start date must be before end date");
+                    }
+                }
+            }
+            if (props.cell.column.id == "end") {
+                let start_js_date = build_date(props.row.getVisibleCells()[2].getValue());
+                let end_js_date = build_date(formal_date_to_datetime(formal, props.cell.getValue()));
+                if (!Number.isNaN(new Date(end_js_date).getMonth())) {
+                    if (new Date(end_js_date) < new Date(start_js_date)) {
+                        throw new Error("End date must be after start date");
+                    }
+                }
+            }
             // After successful validation, update the value in the table
             // console.log(props.row.index);
             // console.log(props.cell.column.id);
@@ -111,7 +129,12 @@ export default function DateTimeCell(props: any) {
             );
             // ___
             // update_status_all(orders);
-        } catch (error) {
+        } catch (err: any) {
+            if (err.issues) {
+                props.setError(err.issues[0].message);
+            } else {
+                props.setError(err.message);
+            }
             // Otherwise reset the cell display value and do not update the table
             setDateText(original_date);
         }
@@ -166,9 +189,10 @@ export default function DateTimeCell(props: any) {
                 "status",
                 update_status(test)
             );
-        } catch (error) {
+        } catch (error: any) {
             // Otherwise reset the cell display value and do not update the table
             setTimeText(original_time);
+            props.setError(error.issues[0].message);
         }
     }
 
