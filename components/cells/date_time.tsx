@@ -131,7 +131,8 @@ export default function DateTimeCell(props: any) {
             // update_status_all(orders);
         } catch (err: any) {
             if (err.issues) {
-                props.setError(err.issues[0].message);
+                // props.setError(err.issues[0].message);
+                props.setError("Date must be formatted as MM-DD-YYYY");
             } else {
                 props.setError(err.message);
             }
@@ -221,7 +222,8 @@ export default function DateTimeCell(props: any) {
             );
         } catch (err: any) {
             if (err.issues) {
-                props.setError(err.issues[0].message);
+                // props.setError(err.issues[0].message);
+                props.setError("Time must be formatted as HH:MM AM/PM");
             } else {
                 props.setError(err.message);
             }
