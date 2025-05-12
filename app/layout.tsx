@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description: "",
 };
 
-const default_font = Quicksand();
+const default_font = Quicksand({ subsets: ["latin"] });
 
 export default function RootLayout({
   children,
