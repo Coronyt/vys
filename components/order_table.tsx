@@ -100,14 +100,21 @@ export default function Table() {
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     meta: {
-      // TODO - Add comments to this code
+      // Cell components can invoke update() to update Order values in the table and context
       update: (row_index: number, column_id: string, value: any) => {
+        // Given a row index, a column ID, and a value to set
         setOrders(
+          // Set the new orders array to the result of a map
           prev => prev.map(
+            // For each order in the previous orders array
             (row, index) =>
+              // Is this the target index?
               index === row_index ? {
+                // Spread the values from the previous entry
                 ...prev[row_index],
+                // But replace the target value with the new value
                 [column_id]: value
+              // If this is not the target index, do not mutate the row
               }: row
           )
         );

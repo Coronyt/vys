@@ -63,11 +63,13 @@ export const display_to_formal_date = (dis: string): string => {
     return mdy[2] + "-" + mdy[0] + "-" + mdy[1]; // Return as YYYY-MM-DD
 }
 
+// Will produce a valid Zod time string if the input is formatted HH:MM AM/am/PM/pm
 export const display_to_formal_time = (dis: string): string => {
     let h: number = Number(dis.split(" ")[0].split(":")[0]);
     let m: string = dis.split(" ")[0].split(":")[1];
-    if ((dis.split(" ")[1] == "PM" || dis.split(" ")[1] == "pm") && h !== 12) {h += 12} // Noon
-    if ((dis.split(" ")[1] == "AM" || dis.split(" ")[1] == "am") && h == 12) {h -= 12} // Midnight
+    // `&& h !== 12` and `&& h == 12` check for Noon and Midnight cases respectively
+    if ((dis.split(" ")[1] == "PM" || dis.split(" ")[1] == "pm") && h !== 12) {h += 12}
+    if ((dis.split(" ")[1] == "AM" || dis.split(" ")[1] == "am") && h == 12) {h -= 12}
     if (h < 10) {
         return "0" + h + ":" + m;
     } else {
@@ -87,6 +89,7 @@ export const formal_date_to_datetime = (date: string, datetime: DateTime): DateT
     }
 }
 
+// Will accept a Zod time string and a DateTime and return a new DateTime with the new time
 export const formal_time_to_datetime = (time: string, datetime: DateTime): DateTime => {
     return {
         month: datetime.month,

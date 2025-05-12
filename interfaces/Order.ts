@@ -5,6 +5,7 @@ import { z } from "zod";
 const zdate = z.string().date();
 const ztime = z.string().time();
 
+// Will accept an Order object and return an updated Status based on the Order's DateTime values
 export const update_status = (order: Order): Status => {
     const curr_date = new Date();
     try {

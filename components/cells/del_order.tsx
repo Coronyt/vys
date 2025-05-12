@@ -18,9 +18,11 @@ export default function DeleteOrderCell(props: any) {
         let i: number = 0;
         let mute = Array.from(orders);
         orders.forEach((order) => {
-            // TODO - Comment this code
+            // If we have found a matching order in the array
             if (order.name === to_delete.name && order.res === to_delete.res && order.start === to_delete.start && order.end === to_delete.end) {
+                // Splice the order out from the array
                 mute.splice(i, 1);
+                // Save mutated array to context
                 setOrders(mute);
             }
             i++;
