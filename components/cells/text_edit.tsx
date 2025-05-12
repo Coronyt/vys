@@ -12,10 +12,6 @@ export default function TextEditCell(props: any) {
         );
     }
 
-    // console.log(props.row.index);
-    // console.log(props.table.getCoreRowModel().rows.length - 1);
-    // console.log(props.row.index == props.table.getCoreRowModel().rows.length - 1);
-
     return (
         <div className="flex justify-center">
             <input

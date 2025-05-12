@@ -1,6 +1,5 @@
 // Will return a date string formatted for Zod validation
 export const build_date = (dt: DateTime): string => {
-    // console.log("passed datetime, ", dt);
     let date_str = `${dt.year}`;
     if (dt.month < 10) {date_str += "-0" + dt.month} else {date_str += "-" + dt.month}
     if (dt.day < 10) {date_str += "-0" + dt.day} else {date_str += "-" + dt.day}
@@ -64,12 +63,11 @@ export const display_to_formal_date = (dis: string): string => {
     return mdy[2] + "-" + mdy[0] + "-" + mdy[1]; // Return as YYYY-MM-DD
 }
 
-// TODO - AM and PM designations should not be case-sensitive
 export const display_to_formal_time = (dis: string): string => {
     let h: number = Number(dis.split(" ")[0].split(":")[0]);
     let m: string = dis.split(" ")[0].split(":")[1];
-    if (dis.split(" ")[1] == "PM" && h !== 12) {h += 12} // Noon
-    if (dis.split(" ")[1] == "AM" && h == 12) {h -= 12} // Midnight
+    if ((dis.split(" ")[1] == "PM" || dis.split(" ")[1] == "pm") && h !== 12) {h += 12} // Noon
+    if ((dis.split(" ")[1] == "AM" || dis.split(" ")[1] == "am") && h == 12) {h -= 12} // Midnight
     if (h < 10) {
         return "0" + h + ":" + m;
     } else {

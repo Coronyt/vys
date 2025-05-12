@@ -93,8 +93,6 @@ export default function OrderForm() {
       // Append to array
       curr.push(new_order);
       // Hand to context
-        // Eventually the orders will be stored locally through a JSON server
-        // In the final iteration, the orders will be organized into a SQL database
       setOrders(curr);
       // Redirect to table
       router.push("/inspect");
@@ -104,9 +102,6 @@ export default function OrderForm() {
       } else { // Custom error
         setError(err.message);
       }
-      // If inputs do not validate, throw and catch an error
-      // Save the error info to local state and display on page conditionally
-      // Assign conditional element(s) testID values so Playwright can check them
     }
   }
 

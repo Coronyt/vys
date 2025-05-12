@@ -1,13 +1,9 @@
 import { DateTime, build_date, build_date_display, build_time, build_time_display, display_to_formal_date, display_to_formal_time, formal_date_to_datetime, formal_time_to_datetime } from "@/interfaces/DateTime";
-import { Status, update_status, update_status_all } from "@/interfaces/Order";
 
 import { Order } from "@/interfaces/Order";
+import { update_status } from "@/interfaces/Order";
 import { useState } from "react";
 import { z } from "zod";
-
-// import { useOrderContext } from "@/context/order_context";
-
-
 
 export default function DateTimeCell(props: any) {
 
@@ -36,16 +32,7 @@ export default function DateTimeCell(props: any) {
     const original_time = time_text_gen();
     const [timeText, setTimeText] = useState(time_text_gen());
 
-    // const { orders, setOrders } = useOrderContext();
-
     const blur_date = () => {
-        // ___
-        // update_status_all(orders);
-        // let test = Array.from(orders);
-        // update_status_all(test);
-        // setOrders(test);
-        // ___
-        // Validate input string w/ Zod after converting format
         const formal = display_to_formal_date(dateText);
         try {
             zdate.parse(formal);
@@ -68,22 +55,11 @@ export default function DateTimeCell(props: any) {
                 }
             }
             // After successful validation, update the value in the table
-            // console.log(props.row.index);
-            // console.log(props.cell.column.id);
             props.table.options.meta.update(
                 props.row.index,
                 props.cell.column.id,
                 formal_date_to_datetime(formal, props.cell.getValue())
             );
-            // ___
-            // Here I can try calling for another table update
-                // Need to update the status cell in the same row
-                // So same row index (props.row.index)
-                // Column ID will be "status"
-                // And the value should be the appropriate Status enum val
-                    // Maybe have an aux func which takes an order and returns its correct status
-            // console.log("cell value: ", props.cell.getValue());
-            // console.log(props.row.getVisibleCells());
             let start_dt: DateTime = {
                 month: 0,
                 day: 0,
@@ -98,21 +74,13 @@ export default function DateTimeCell(props: any) {
                 hour: 0,
                 minute: 0
             }
-            if (props.cell.column.id == "start") { // if we are modifying the start date
+            if (props.cell.column.id == "start") {
                 start_dt = formal_date_to_datetime(formal, props.cell.getValue());
                 end_dt = props.row.getVisibleCells()[3].getValue();
-                // start_dt = formal;
-                // console.log(formal_date_to_datetime(formal, props.cell.getValue())); // combine new start date w/ cell DateTime
-                // end_dt = build_date(props.row.getVisibleCells()[3].getValue()); // retain original end date
-                // console.log(props.row.getVisibleCells()[3].getValue()); // [3] == end
             }
-            if (props.cell.column.id == "end") { // if we are modifying the end date
+            if (props.cell.column.id == "end") {
                 start_dt = props.row.getVisibleCells()[2].getValue();
                 end_dt = formal_date_to_datetime(formal, props.cell.getValue());
-                // end_dt = formal;
-                // console.log(formal_date_to_datetime(formal, props.cell.getValue())); // combine new end date w/ cell DateTime
-                // start_dt = build_date(props.row.getVisibleCells()[2].getValue()); // retain original start date
-                // console.log(props.row.getVisibleCells()[2].getValue()); // [2] == start
             }
             let test: Order = {
                 name: props.row.getVisibleCells()[0].getValue(),
@@ -127,28 +95,20 @@ export default function DateTimeCell(props: any) {
                 "status",
                 update_status(test)
             );
-            // ___
-            // update_status_all(orders);
         } catch (err: any) {
             if (err.issues) {
-                // props.setError(err.issues[0].message);
                 props.setError("Date must be formatted as MM-DD-YYYY");
             } else {
                 props.setError(err.message);
             }
-            // Otherwise reset the cell display value and do not update the table
             setDateText(original_date);
         }
     }
 
     const blur_time = () => {
-        // update_status_all(orders);
-        // Validate input string w/ Zod after converting format
         const formal = display_to_formal_time(timeText);
         try {
             ztime.parse(formal);
-            // console.log(formal);
-            // ___
             if (props.cell.column.id == "start") {
                 let start_js_date = build_date(props.row.getVisibleCells()[2].getValue());
                 let end_js_date = build_date(props.row.getVisibleCells()[3].getValue());
@@ -177,14 +137,12 @@ export default function DateTimeCell(props: any) {
                     }
                 }
             }
-            // ___
             // After successful validation, update the value in the table
             props.table.options.meta.update(
                 props.row.index,
                 props.cell.column.id,
                 formal_time_to_datetime(formal, props.cell.getValue())
             );
-            // update_status_all(orders);
             let start_dt: DateTime = {
                 month: 0,
                 day: 0,
@@ -199,11 +157,11 @@ export default function DateTimeCell(props: any) {
                 hour: 0,
                 minute: 0
             }
-            if (props.cell.column.id == "start") { // if we are modifying the start date
+            if (props.cell.column.id == "start") {
                 start_dt = formal_time_to_datetime(formal, props.cell.getValue());
                 end_dt = props.row.getVisibleCells()[3].getValue();
             }
-            if (props.cell.column.id == "end") { // if we are modifying the end date
+            if (props.cell.column.id == "end") {
                 start_dt = props.row.getVisibleCells()[2].getValue();
                 end_dt = formal_time_to_datetime(formal, props.cell.getValue());
             }
@@ -222,12 +180,10 @@ export default function DateTimeCell(props: any) {
             );
         } catch (err: any) {
             if (err.issues) {
-                // props.setError(err.issues[0].message);
                 props.setError("Time must be formatted as HH:MM AM/PM");
             } else {
                 props.setError(err.message);
             }
-            // Otherwise reset the cell display value and do not update the table
             setTimeText(original_time);
         }
     }

@@ -19,7 +19,6 @@ export default function DeleteOrderCell(props: any) {
         let mute = Array.from(orders);
         orders.forEach((order) => {
             // TODO - Comment this code
-            // TODO - Move comparison logic to Order.ts?
             if (order.name === to_delete.name && order.res === to_delete.res && order.start === to_delete.start && order.end === to_delete.end) {
                 mute.splice(i, 1);
                 setOrders(mute);

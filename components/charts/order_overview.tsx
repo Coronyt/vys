@@ -1,6 +1,6 @@
 'use client';
 
-import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import { useEffect, useState } from "react";
 
 import { useOrderContext } from "@/context/order_context";
@@ -55,7 +55,6 @@ export default function OrderOverview() {
         <ResponsiveContainer width={400} height={250}>
           <PieChart width={400} height={250}>
             <Tooltip />
-            {/* <Legend formatter={(value, entry, index) => (<span className="text-white">{value}</span>)} /> */}
             <Pie data={chartData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={100}>
               {chartData.map((entry, index) => (<Cell key={`cell-${index}`} fill={colors[index]} data-testid={`oo_piecell_${index}`} />))}
             </Pie>
