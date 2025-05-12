@@ -43,7 +43,7 @@ export default function YearlyOverview() {
         orders.forEach((order) => {
             let start = new Date(build_date(order.start));
             let mon = start.getMonth();
-            if (!Number.isNaN(mon)) {
+            if (!Number.isNaN(mon) && (start.getFullYear() == 2025)) { // Current year hard-coded for now
                 if (order.status == 0) {data[mon].pending++;}
                 if (order.status == 1) {data[mon].scheduled++;}
                 if (order.status == 2) {data[mon].active++;}
@@ -60,10 +60,10 @@ export default function YearlyOverview() {
                 <XAxis dataKey="name"/>
                 <YAxis />
                 <Tooltip formatter={(value, entry, index) => (<span className="text-black">{value}</span>)} wrapperStyle={{color: 'black'}} />
-                <Bar stackId="a" dataKey="completed" fill="#0a0f23" />
-                <Bar stackId="a" dataKey="active" fill="#2c5404" />
-                <Bar stackId="a" dataKey="scheduled" fill="#0e2d7d" />
-                <Bar stackId="a" dataKey="pending" fill="#730424" />
+                <Bar stackId="a" dataKey="completed" fill="#0a0f23" data-testid="bar_completed" />
+                <Bar stackId="a" dataKey="active" fill="#2c5404" data-testid="bar_active" />
+                <Bar stackId="a" dataKey="scheduled" fill="#0e2d7d" data-testid="bar_scheduled" />
+                <Bar stackId="a" dataKey="pending" fill="#730424" data-testid="bar_pending" />
             </BarChart>
         </ResponsiveContainer>
         <div className="flex justify-center">

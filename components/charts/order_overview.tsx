@@ -57,7 +57,7 @@ export default function OrderOverview() {
             <Tooltip />
             {/* <Legend formatter={(value, entry, index) => (<span className="text-white">{value}</span>)} /> */}
             <Pie data={chartData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={100}>
-              {chartData.map((entry, index) => (<Cell key={`cell-${index}`} fill={colors[index]} />))}
+              {chartData.map((entry, index) => (<Cell key={`cell-${index}`} fill={colors[index]} data-testid={`oo_piecell_${index}`} />))}
             </Pie>
           </PieChart>
         </ResponsiveContainer>

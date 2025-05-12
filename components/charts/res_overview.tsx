@@ -54,7 +54,7 @@ export default function ResourceOverview() {
           <PieChart width={400} height={250}>
             <Tooltip />
             <Pie data={chartData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={100}>
-              {chartData.map((entry, index) => (<Cell key={`cell-${index}`} fill={colors[`${index % colors.length}`]} />))}
+              {chartData.map((entry, index) => (<Cell key={`cell-${index}`} fill={colors[`${index % colors.length}`]} data-testid={`ru_piecell_${index}`} />))}
             </Pie>
           </PieChart>
         </ResponsiveContainer>
