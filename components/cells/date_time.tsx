@@ -95,6 +95,7 @@ export default function DateTimeCell(props: any) {
                 "status",
                 update_status(test)
             );
+            props.setError("");
         } catch (err: any) {
             if (err.issues) {
                 props.setError("Date must be formatted as MM-DD-YYYY");
@@ -178,6 +179,7 @@ export default function DateTimeCell(props: any) {
                 "status",
                 update_status(test)
             );
+            props.setError("");
         } catch (err: any) {
             if (err.issues) {
                 props.setError("Time must be formatted as HH:MM AM/PM");
