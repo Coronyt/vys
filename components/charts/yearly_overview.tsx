@@ -59,11 +59,11 @@ export default function YearlyOverview() {
             <BarChart data={chartData}>
                 <XAxis dataKey="name"/>
                 <YAxis />
-                <Tooltip />
-                <Bar stackId="a" dataKey="pending" fill="#730424" />
-                <Bar stackId="a" dataKey="scheduled" fill="#0e2d7d" />
+                <Tooltip formatter={(value, entry, index) => (<span className="text-black">{value}</span>)} wrapperStyle={{color: 'black'}} />
+                <Bar stackId="a" dataKey="completed" fill="#0a0f23" />
                 <Bar stackId="a" dataKey="active" fill="#2c5404" />
-                <Bar stackId="a" dataKey="completed" fill="#ffffff" />
+                <Bar stackId="a" dataKey="scheduled" fill="#0e2d7d" />
+                <Bar stackId="a" dataKey="pending" fill="#730424" />
             </BarChart>
         </ResponsiveContainer>
         <div className="flex justify-center">
