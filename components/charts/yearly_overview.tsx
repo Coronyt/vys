@@ -43,7 +43,7 @@ export default function YearlyOverview() {
         orders.forEach((order) => {
             let start = new Date(build_date(order.start));
             let mon = start.getMonth();
-            if (!Number.isNaN(mon) && (start.getFullYear() == 2025)) { // Current year hard-coded for now
+            if (!Number.isNaN(mon) && (start.getFullYear() == new Date().getFullYear())) {
                 if (order.status == 0) {data[mon].pending++;}
                 if (order.status == 1) {data[mon].scheduled++;}
                 if (order.status == 2) {data[mon].active++;}
