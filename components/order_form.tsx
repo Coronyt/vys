@@ -64,6 +64,12 @@ export default function OrderForm() {
       // Loading start date/time information into DateTime object
       const start_date_arr = start_date.split("-"); // [0] = year, [1] = month, [2] = day
       const start_time_arr = start_time.split(":"); // [0] = hour, [1] = minute
+      // Is the year after 1900?
+      if (Number(start_date_arr[0])) {
+        if (Number(start_date_arr[0]) < 1900) {
+          throw new Error("Start year must be after 1900");
+        }
+      }
       const start_date_time: DateTime = {
         month: Number(start_date_arr[1]),
         day: Number(start_date_arr[2]),
@@ -73,6 +79,12 @@ export default function OrderForm() {
       } // Loading end date/time information into DateTime object
       const end_date_arr = end_date.split("-"); // [0] = year, [1] = month, [2] = day
       const end_time_arr = end_time.split(":"); // [0] = hour, [1] = minute
+      // Is the year after 1900?
+      if (Number(end_date_arr[0])) {
+        if (Number(end_date_arr[0]) < 1900) {
+          throw new Error("End year must be after 1900");
+        }
+      }
       const end_date_time: DateTime = {
         month: Number(end_date_arr[1]),
         day: Number(end_date_arr[2]),

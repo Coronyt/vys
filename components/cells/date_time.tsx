@@ -44,6 +44,11 @@ export default function DateTimeCell(props: any) {
                         throw new Error("Start date must be before end date");
                     }
                 }
+                if (!Number.isNaN(new Date(start_js_date).getFullYear())) {
+                    if (new Date(start_js_date).getFullYear() < 1900) {
+                        throw new Error("Start year must be after 1900");
+                    }
+                }
             }
             if (props.cell.column.id == "end") {
                 let start_js_date = build_date(props.row.getVisibleCells()[2].getValue());
@@ -51,6 +56,11 @@ export default function DateTimeCell(props: any) {
                 if (!Number.isNaN(new Date(end_js_date).getMonth())) {
                     if (new Date(end_js_date) < new Date(start_js_date)) {
                         throw new Error("End date must be after start date");
+                    }
+                }
+                if (!Number.isNaN(new Date(end_js_date).getFullYear())) {
+                    if (new Date(end_js_date).getFullYear() < 1900) {
+                        throw new Error("End year must be after 1900");
                     }
                 }
             }
