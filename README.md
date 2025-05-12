@@ -5,7 +5,7 @@ React app for production scheduling and visualization.
 - Manage your created orders via a table view with fully editible cells and filters for order status
 - Dashboard provides an overview of all production orders and a visual breakdown of important metrics
 
-## Technical details
+## Implementation
 - Created orders are currently stored in React Context
 
     - OrderContext holds the complete list of user-created orders
@@ -43,16 +43,19 @@ React app for production scheduling and visualization.
 - To run the unit tests yourself:
 
     - You must have a local instance of `vys` running at port 3000
-    - Type `npx playwright test --project=chromium` into the command line
+    - Paste `npx playwright test --project=chromium` into the command line
     - This will run all of the unit tests in the background and host a local HTML report with the results
-    - You can also run `npx playwright test --project=chromium --headed` to see each test run in the browser
+    - You can also run `npx playwright test --project=chromium --headed` to watch each test run in the browser
 
 ## Known issues
 - Playwright tests which interact with the table do not pass on Webkit-based browsers
-
     - The reason for this is currently not clear, further testing required
+    - Some of these tests (order_create_2, 3, 4) pass in debug mode
 
 - Order description input currently disabled on order creation form
+- Design is currently not responsive (will not format correctly on mobile)
+- DateTimeCell will allow certain invalid years if the input is formatted a specific way
+    - ex. 01-01-0001 will be accepted and result in an invalid date in the cell
 
 ## Planned features
 - Resizable table columns
@@ -60,3 +63,4 @@ React app for production scheduling and visualization.
 - Table pagination
 - Database integration
 - User-defined resources
+- Responsive design w/ Tailwind
