@@ -9,11 +9,9 @@ export default function FilterSearch(props: any) {
 
     const switch_filter_type = (e: any) => {
         if (e.target.value == "filter_by_name") {
-            console.log("Switched to filter_by_name");
             setFilterType("filter_by_name");
         }
         if (e.target.value == "filter_by_res") {
-            console.log("Switched to filter_by_res");
             setFilterType("filter_by_res");
         }
     }
@@ -31,8 +29,8 @@ export default function FilterSearch(props: any) {
                 <input type="radio" name="filter_type" value="filter_by_name" id="filter_by_name" className="block" onChange={switch_filter_type} defaultChecked />
                 <label htmlFor="filter_by_name" className="filter_label">Filter by name</label>
             </div>
-            <div className="flex">
-                <input type="radio" name="filter_type" value="filter_by_res" id="filter_by_res" className="block" onChange={switch_filter_type} />
+            <div className="flex disabled">
+                <input type="radio" name="filter_type" value="filter_by_res" id="filter_by_res" className="block" onChange={switch_filter_type} disabled />
                 <label htmlFor="filter_by_res" className="filter_label">Filter by resource</label>
             </div>
         </div>
