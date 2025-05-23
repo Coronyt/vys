@@ -109,7 +109,7 @@ body {
 }
 
 .filter_switch {
-  @apply flex text-lg place-self-end;
+  @apply flex text-lg place-self-end mt-3.5;
 }
 
 .filter_switch h3 {
@@ -118,6 +118,14 @@ body {
 
 .filter_switch svg {
   @apply ml-4 scale-125 hover:text-blue-400 hover:cursor-pointer transition ease-linear duration-200 hover:animate-jump;
+}
+
+.filter_search {
+  @apply border-1 rounded-lg p-1 pl-2;
+}
+
+.filter_label {
+  @apply -mt-0.5 -mb-0.5 ml-2.5;
 }
 
 .layout_primary {

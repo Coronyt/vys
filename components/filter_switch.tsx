@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function FilterSwitch(props: any) {
 
-    const [filterLabel, setFilterLabel] = useState("No filter applied");
+    const [filterLabel, setFilterLabel] = useState("No status filter applied");
 
     const handle_click = () => {
         const to_label = props.cycle();

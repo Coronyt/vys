@@ -4,6 +4,7 @@ import { Status, update_status } from "@/interfaces/Order";
 import { getCoreRowModel, getFilteredRowModel, useReactTable } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 
+import FilterSearch from "./filter_search";
 import FilterSwitch from "./filter_switch";
 import { Order } from "@/interfaces/Order";
 import TableEntries from "./table_entries";
@@ -24,23 +25,23 @@ export default function Table() {
   const cycle_filter = (): string => {
     if (columnFilters[0].value == "") {
       setColumnFilters([{ id: "status", value: "0" }]);
-      return "Pending orders";
+      return "Displaying pending orders";
     }
     if (columnFilters[0].value == "0") {
       setColumnFilters([{ id: "status", value: "1" }]);
-      return "Scheduled orders";
+      return "Displaying scheduled orders";
     }
     if (columnFilters[0].value == "1") {
       setColumnFilters([{ id: "status", value: "2" }]);
-      return "Active orders";
+      return "Displaying active orders";
     }
     if (columnFilters[0].value == "2") {
       setColumnFilters([{ id: "status", value: "3" }]);
-      return "Completed orders";
+      return "Displaying completed orders";
     }
     if (columnFilters[0].value == "3") {
       setColumnFilters([{ id: "status", value: "" }]);
-      return "No filter applied";
+      return "No status filter applied";
     }
     return "";
   }
@@ -126,8 +127,9 @@ export default function Table() {
     <div>
       <h2 className="page_title" data-testid="page_title">View all orders</h2>
       <div className="flex justify-between">
+        <FilterSearch></FilterSearch>
         {error &&
-          <div className="error text-xl pt-0.5" data-testid="error_msg">
+          <div className="error text-xl pt-0.5 -ml-102" data-testid="error_msg">
             {error}
           </div>
         }
