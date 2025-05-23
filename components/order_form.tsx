@@ -212,7 +212,7 @@ export default function OrderForm() {
       </div>
       {error &&
         <div className="error" data-testid="error_msg">
-          {`${error}`}
+          {`${"* " + error}`}
         </div>
       }
     </form>

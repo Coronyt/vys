@@ -46,6 +46,26 @@ export default function Table() {
     return "";
   }
 
+  const apply_text_filter = (text_filter: string) => {
+    // If we are removing the text filter
+    if (text_filter == "") {
+      if (columnFilters.length == 2) {
+        // Remove the filter object from the array
+        setColumnFilters([columnFilters[0]]);
+      }
+    }
+    // If there is already a text filter applied
+    if (columnFilters.length == 2) {
+      // Replace the old text filter with the new text filter
+      setColumnFilters([columnFilters[0]].concat([{ id: "name", value: text_filter }]));
+    }
+    // If there is no text filter applied yet
+    else if (columnFilters.length == 1) {
+      // Append the incoming text filter
+      setColumnFilters(columnFilters.concat([{ id: "name", value: text_filter }]));
+    }
+  }
+
   const columns = [
     {
         accessorKey: 'name',
@@ -127,10 +147,10 @@ export default function Table() {
     <div>
       <h2 className="page_title" data-testid="page_title">View all orders</h2>
       <div className="flex justify-between">
-        <FilterSearch></FilterSearch>
+        <FilterSearch apply={apply_text_filter} />
         {error &&
-          <div className="error text-xl pt-0.5 -ml-102" data-testid="error_msg">
-            {error}
+          <div className="error text-xl pt-2 -ml-42" data-testid="error_msg">
+            {"* " + error}
           </div>
         }
         {!error && <div></div>}
