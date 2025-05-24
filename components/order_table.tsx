@@ -24,23 +24,23 @@ export default function Table() {
 
   const cycle_filter = (): string => {
     if (columnFilters[0].value == "") {
-      setColumnFilters([{ id: "status", value: "0" }]);
+      setColumnFilters([{ id: "status", value: "0" }].concat(columnFilters.length == 2 ? [columnFilters[1]] : []));
       return "Displaying pending orders";
     }
     if (columnFilters[0].value == "0") {
-      setColumnFilters([{ id: "status", value: "1" }]);
+      setColumnFilters([{ id: "status", value: "1" }].concat(columnFilters.length == 2 ? [columnFilters[1]] : []));
       return "Displaying scheduled orders";
     }
     if (columnFilters[0].value == "1") {
-      setColumnFilters([{ id: "status", value: "2" }]);
+      setColumnFilters([{ id: "status", value: "2" }].concat(columnFilters.length == 2 ? [columnFilters[1]] : []));
       return "Displaying active orders";
     }
     if (columnFilters[0].value == "2") {
-      setColumnFilters([{ id: "status", value: "3" }]);
+      setColumnFilters([{ id: "status", value: "3" }].concat(columnFilters.length == 2 ? [columnFilters[1]] : []));
       return "Displaying completed orders";
     }
     if (columnFilters[0].value == "3") {
-      setColumnFilters([{ id: "status", value: "" }]);
+      setColumnFilters([{ id: "status", value: "" }].concat(columnFilters.length == 2 ? [columnFilters[1]] : []));
       return "No status filter applied";
     }
     return "";
