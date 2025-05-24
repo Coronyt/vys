@@ -4,6 +4,7 @@ import { Status, update_status } from "@/interfaces/Order";
 import { getCoreRowModel, getFilteredRowModel, useReactTable } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 
+import AddOrder from "./add_order";
 import FilterSearch from "./filter_search";
 import FilterSwitch from "./filter_switch";
 import { Order } from "@/interfaces/Order";
@@ -154,7 +155,10 @@ export default function Table() {
           </div>
         }
         {!error && <div></div>}
-        <FilterSwitch cycle={cycle_filter} />
+        <div className="flex">
+          <FilterSwitch cycle={cycle_filter} />
+          <AddOrder></AddOrder>
+        </div>
       </div>
       <TableHeader table={table}></TableHeader>
       <TableEntries table={table} setError={setError}></TableEntries>

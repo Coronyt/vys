@@ -128,6 +128,10 @@ body {
   @apply -mt-0.5 -mb-0.5 ml-2.5;
 }
 
+.add_order {
+  @apply p-1 scale-125 mt-2.5 ml-2.5 hover:text-blue-400 hover:cursor-pointer transition ease-linear duration-200 hover:animate-jump;
+}
+
 .layout_primary {
   @apply bg-black min-h-screen pt-2;
 }
