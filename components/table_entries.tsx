@@ -23,6 +23,9 @@ export default function TableEntries(props: any) {
                   {cell.column.id == "status" && <OrderStatusCell table={props.table} row={row} cell={cell} setError={props.setError} />}
                 </div>
               }
+              else {
+                return <div className="border-r-1 p-3 w-60 h-12 hover:cursor-default"></div>
+              }
             })}
           </div>
         })}
