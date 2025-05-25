@@ -72,10 +72,10 @@ export default function Table() {
         accessorKey: 'name',
         header: 'Order'
     },
-    // {
-    //   accessorKey: 'desc',
-    //   header: 'Description'
-    // },
+    {
+      accessorKey: 'desc',
+      header: 'Description'
+    },
     {
       accessorKey: 'res',
       header: 'Resource'

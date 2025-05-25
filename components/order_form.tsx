@@ -135,10 +135,10 @@ export default function OrderForm() {
       </div>
       <div className="form_segment">
         <label htmlFor="desc_input">Description:</label>
-        <textarea disabled
+        <textarea
           name="desc_input"
           id="desc_input"
-          className="desc_input disabled"
+          className="desc_input"
           value={desc}
           onChange={(e) => {setDesc(e.target.value)}}
         />
