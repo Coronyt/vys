@@ -10,13 +10,14 @@ export default function DeleteOrderCell(props: any) {
         const to_delete: Order = {
             name: props.row.getVisibleCells()[0].getValue(),
             desc: "New order description", // Not checking for this value
-            res: props.row.getVisibleCells()[1].getValue(),
-            start: props.row.getVisibleCells()[2].getValue(),
-            end: props.row.getVisibleCells()[3].getValue(),
+            res: props.row.getVisibleCells()[2].getValue(),
+            start: props.row.getVisibleCells()[3].getValue(),
+            end: props.row.getVisibleCells()[4].getValue(),
             status: 0 // Not checking for this value
         }
         let i: number = 0;
         let mute = Array.from(orders);
+        console.log("target", to_delete);
         orders.forEach((order) => {
             // If we have found a matching order in the array
             if (order.name === to_delete.name && order.res === to_delete.res && order.start === to_delete.start && order.end === to_delete.end) {
