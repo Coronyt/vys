@@ -100,8 +100,16 @@ body {
   @apply border-b-1 border-r-1 p-3 w-60 h-12 hover:cursor-default;
 }
 
+.open_cell {
+  @apply border-b-1 p-3 w-60 h-12 hover:cursor-default;
+}
+
 .del_icon {
   @apply p-1 hover:text-red-600 hover:cursor-pointer hover:animate-jump transition ease-linear duration-200;
+}
+
+.desc_icon {
+  @apply -ml-14 mr-8 hover:text-blue-400 hover:cursor-pointer hover:animate-jump transition ease-linear duration-200;
 }
 
 .page_title {

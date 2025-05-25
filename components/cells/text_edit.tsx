@@ -1,3 +1,4 @@
+import DescEditIcon from "./desc_icon";
 import { useState } from "react";
 
 export default function TextEditCell(props: any) {
@@ -13,15 +14,20 @@ export default function TextEditCell(props: any) {
     }
 
     return (
-        <div className="flex justify-center">
-            <input
-                type="text"
-                value={text}
-                onChange={(e) => {setText(e.target.value)}}
-                onBlur={blur}
-                className="w-80"
-                data-testid={`name_cell_${props.row.index}`}
-            />
+        <div className="flex">
+            <div className="desc_icon">
+                <DescEditIcon descVisible={props.descVisible} setDescVisible={props.setDescVisible} />
+            </div>
+            <div className="flex justify-center">
+                <input
+                    type="text"
+                    value={text}
+                    onChange={(e) => {setText(e.target.value)}}
+                    onBlur={blur}
+                    className="w-80"
+                    data-testid={`name_cell_${props.row.index}`}
+                />
+            </div>
         </div>
     );
   }

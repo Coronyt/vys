@@ -21,7 +21,7 @@ export default function TableHeader(props: any) {
                   </div>
                 }
                 // If an order description is open, instance the special description cell
-                else {
+                else if (props.descVisible) {
                   return <div className={`${(header.id == "name") ? "table_cell border-t-1 border-l-1 rounded-tl-lg" : "table_cell border-t-1"}` +
                   `${((header.id == "status") ? " rounded-tr-lg" : "")}`} key={header.id}>
                       <div className="flex justify-center">
@@ -29,7 +29,7 @@ export default function TableHeader(props: any) {
                           {`${header.column.columnDef.header}`}
                         </div>
                       </div>
-                      <DescEditCell table={props.table}></DescEditCell>
+                      <DescEditCell table={props.table} descVisible={props.descVisible} setDescVisible={props.setDescVisible} />
                   </div>
                 }
             })}</div>
