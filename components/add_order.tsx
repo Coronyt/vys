@@ -6,13 +6,41 @@ import { Status } from "@/interfaces/Order";
 import { useOrderContext } from "@/context/order_context";
 import { useResContext } from "@/context/res_context";
 
-export default function AddOrder() {
+export default function AddOrder(props: any) {
 
     const { orders, setOrders } = useOrderContext();
     const { resources, setResources } = useResContext();
 
     const add_order = () => {
-        console.log("add_order");
+        // ___
+        const start_date_time: DateTime = {
+            month: NaN,
+            day: NaN,
+            year: 0,
+            hour: 0,
+            minute: NaN
+        }
+        const end_date_time: DateTime = {
+            month: NaN,
+            day: NaN,
+            year: 0,
+            hour: 0,
+            minute: NaN
+        }
+        const new_order: Order = {
+            name: "New order",
+            desc: "New order description",
+            res: resources[0].id,
+            start: start_date_time,
+            end: end_date_time,
+            status: Status.PENDING
+        }
+        // Get current orders
+        const curr = Array.from(orders);
+        // Append to array
+        curr.push(new_order);
+        // Hand to context
+        setOrders(curr);
     }
 
     return (
