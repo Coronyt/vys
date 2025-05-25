@@ -16,7 +16,8 @@ export default function TextEditCell(props: any) {
     return (
         <div className="flex">
             <div className="desc_icon">
-                <DescEditIcon descVisible={props.descVisible} setDescVisible={props.setDescVisible} />
+                <DescEditIcon descVisible={props.descVisible} setDescVisible={props.setDescVisible}
+                    openOrder={props.openOrder} setOpenOrder={props.setOpenOrder} cell_order={props.cell_order} />
             </div>
             <div className="flex justify-center">
                 <input

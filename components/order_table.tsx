@@ -15,6 +15,8 @@ import { useOrderContext } from "@/context/order_context";
 export default function Table() {
 
   const [error, setError] = useState("");
+
+  const [openOrder, setOpenOrder] = useState({});
   const [descVisible, setDescVisible] = useState(false);
 
   const [columnFilters, setColumnFilters] = useState([
@@ -162,7 +164,7 @@ export default function Table() {
         </div>
       </div>
       <TableHeader table={table} descVisible={descVisible} setDescVisible={setDescVisible} />
-      <TableEntries table={table} setError={setError} descVisible={descVisible} setDescVisible={setDescVisible} />
+      <TableEntries table={table} setError={setError} descVisible={descVisible} setDescVisible={setDescVisible} openOrder={openOrder} setOpenOrder={setOpenOrder} />
     </div>
   );
 }

@@ -29,6 +29,18 @@ export const update_status = (order: Order): Status => {
     }
 }
 
+// Will accept two Order objects and return true if all data values match
+export const match_orders = (o1: Order, o2: Order): boolean => {
+    if (o1.name == o2.name &&
+        o1.desc == o2.desc &&
+        o1.res == o2.res &&
+        o1.start == o2.start &&
+        o1.end == o2.end &&
+        o1.status == o2.status
+    ) { return true; }
+    return false;
+}
+
 export enum Status {
     PENDING,
     SCHEDULED,

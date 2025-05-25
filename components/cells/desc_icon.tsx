@@ -1,8 +1,8 @@
 export default function DescEditIcon(props: any) {
 
   const open_desc = () => {
-    console.log("props.descVisible is now", !props.descVisible);
     props.setDescVisible(!props.descVisible);
+    props.setOpenOrder(props.cell_order);
   }
 
   return (
