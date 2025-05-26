@@ -29,7 +29,8 @@ export default function TableHeader(props: any) {
                           {`${header.column.columnDef.header}`}
                         </div>
                       </div>
-                      <DescEditCell table={props.table} descVisible={props.descVisible} setDescVisible={props.setDescVisible} />
+                      <DescEditCell table={props.table} descVisible={props.descVisible} setDescVisible={props.setDescVisible}
+                        openOrder={props.openOrder} setOpenOrder={props.setOpenOrder} />
                   </div>
                 }
             })}</div>

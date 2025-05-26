@@ -37,7 +37,7 @@ export default function TableEntries(props: any) {
               }
               // Will instance dummy divs with cell dimensions to use as element spacers
               else if (props.descVisible) {
-                return <div className="border-r-1 p-3 w-60 h-12 hover:cursor-default"></div>
+                return <div className="border-r-1 p-3 w-60 h-12 hover:cursor-default" key={cell.id}></div>
               }
             })}
           </div>

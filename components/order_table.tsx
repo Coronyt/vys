@@ -163,7 +163,7 @@ export default function Table() {
           <AddOrder></AddOrder>
         </div>
       </div>
-      <TableHeader table={table} descVisible={descVisible} setDescVisible={setDescVisible} />
+      <TableHeader table={table} descVisible={descVisible} setDescVisible={setDescVisible} openOrder={openOrder} setOpenOrder={setOpenOrder} />
       <TableEntries table={table} setError={setError} descVisible={descVisible} setDescVisible={setDescVisible} openOrder={openOrder} setOpenOrder={setOpenOrder} />
     </div>
   );
