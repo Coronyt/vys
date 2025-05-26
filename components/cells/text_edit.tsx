@@ -25,7 +25,7 @@ export default function TextEditCell(props: any) {
                     value={text}
                     onChange={(e) => {setText(e.target.value)}}
                     onBlur={blur}
-                    className="w-80"
+                    className="w-54"
                     data-testid={`name_cell_${props.row.index}`}
                 />
             </div>
