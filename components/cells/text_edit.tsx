@@ -1,4 +1,5 @@
 import DescEditIcon from "./desc_icon";
+import { match_orders } from "@/interfaces/Order";
 import { useState } from "react";
 
 export default function TextEditCell(props: any) {
@@ -15,7 +16,7 @@ export default function TextEditCell(props: any) {
 
     return (
         <div className="flex">
-            <div className="desc_icon">
+            <div className={`desc_icon ${match_orders(props.cell_order, props.openOrder) && "text-blue-400"}`}>
                 <DescEditIcon descVisible={props.descVisible} setDescVisible={props.setDescVisible}
                     openOrder={props.openOrder} setOpenOrder={props.setOpenOrder} cell_order={props.cell_order} />
             </div>

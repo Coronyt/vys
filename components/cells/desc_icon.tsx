@@ -1,8 +1,25 @@
+import { match_orders } from "@/interfaces/Order";
+
 export default function DescEditIcon(props: any) {
 
   const open_desc = () => {
-    props.setDescVisible(!props.descVisible);
-    props.setOpenOrder(props.cell_order);
+    // Is an order open already?
+    if (!props.descVisible) {
+      // If not, open this order
+      props.setDescVisible(!props.descVisible);
+      props.setOpenOrder(props.cell_order);
+    } else { // If an order is already open, is it this order?
+      if (match_orders(props.cell_order, props.openOrder)) {
+        // If so, close this order
+        props.setDescVisible(!props.descVisible);
+        props.setOpenOrder({});
+      }
+      // Or another order?
+      else {
+        // If so, open the order
+        props.setOpenOrder(props.cell_order);
+      }
+    }
   }
 
   return (

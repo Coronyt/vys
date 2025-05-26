@@ -1,7 +1,5 @@
 export default function DescEditCell(props: any) {
 
-  // console.log(props.openOrder);
-
   return (
     // Cell height will scale with number of visible rows in Table
     <div>
